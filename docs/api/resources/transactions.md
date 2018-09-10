@@ -28,17 +28,17 @@ Returns a list of all transactions that took place during specified time period 
       "MerchantName": "Acme Ltd",
       "PaymentPointId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1",
       "PaymentPointName" : "snack kiosk",
-      "ReceiverAccount" : "DK123456789", // IBAN or regular account number
+      "ReceiverAccount" : "DK123456789",
       "Transactions": [
           {
-              "Type": "<Payment|Refund|Fee|SentBackTransfer|Payout>",
+              "Type": "Payment",
               "Amount": 81.00,
               "CurrencyCode": "EUR",
-              "CustomBulkId" : null, // pass through reference (provided by clients), a.k.a. "Merchant free text field"
-              "Timestamp": "2018-06-13T04:44:06+01:00", // timestamp in merchant's timezone
+              "CustomBulkId" : null,
+              "Timestamp": "2018-06-13T04:44:06Z",
               "PaymentTransactionId" : "AABBCCDD11223344",
-              "TransferReference" : "FI20180624123456789", // bank ref number, incl. FI ref number
-              "TransferReferenceDate" : "2018-06-24", // reference date, not the actual transfer time
+              "TransferReference" : "FI20180624123456789",
+              "TransferReferenceDate" : "2018-06-24",
               "SenderComment" : "This is fun",
               "CustomPaymentId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1"
           },
@@ -53,69 +53,22 @@ Returns a list of all transactions that took place during specified time period 
   MerchantName | string | Merchant legal name (as registered with MobilePay)
   PaymentPointId | [Guid](../types.md#guid) | Unique identifier for a payment point. Corresponds to the provided url parameter.
   PaymentPointName | string | The registered name of a payment point.
-  ReceiverAccount | string | Account number where funds have been transferred to.
+  ReceiverAccount | string | Account number where funds have been transferred to. IBAN or regular account number.
+  Transactions | json array | A collection of transactions (see below for details)
+  Type | [Transaction type](../types.md#transaction-type) | Specifies transaction type. Possible values are: Payment, Refund, Fee, SentBackTransfer, Payout
+  Amount | [Admount](../types.md#amount) | Transaction amount. Positive for debit transactions, negative for credit transactions.
+  CurrencyCode | [Currency](../types.md#currency) | Transaction currency.
+  CustomBulkId | string | Pass through reference provided by merchant for the transaction (optional).
+  Timestamp | [Timestamp](../types.md#timestamp) | Timestamp when transaction has been completed. Corresponds to url parameters "fromDateTimeOffset" and "toDateTimeOffset".
+  PaymentTransactionId | string | Unique payment provider transaction id used when collecting funds for this individual transaction.
+  TransferReference | [Transfer reference](../types.md#transfer-reference) | Bank reference number used for aggregated transfer to receiver account. Null if this transaction has not been transferred yet.
+  TransferReferenceDate | [Date](../types.md#date) | Date used for aggregated transfer reference. Null if this transaction has not been transferred yet.
+  SenderComment | string | Free-form text message provided by payment sender (optional).
+  CustomPaymentId | string | Custom payment id provided by merchant / payment integrator (optional).
     
 * **Error Response:**
 
-   * 400 when there was a validation problem with the request
+   * 400 when there was a validation problem with the request. Also when result count exceeds 20000 records.
    * 401 when required authentication headers are missing/invalid in the request
    * 403 when user is not authorized to access the resource or user account is disabled
    * 404 when payment point does not exist
-
-## Edit Online Merchant
-
-Make changes to an existing merchant 
-
-* **URL**
-
-  /online-merchants/:id
-  
-* **Method**
-
-  PUT
-
-*  **URL Params**
-
-    Name | Type | Detail
-    ----- | ------ | ------
-    id | [GUID](../types.MD#guid) | The OnlineMerchantId of the merchant to edit 
-  
-* **Data Params**
-  
-  All parameters are optional, but at least one must be specified
-
-  Name | Type | Detail
-  ----- | ------ | ------
-  *Name* | string | Merchant name
-  *LogoUrl* | [HttpsURL](../types.MD#httpsurl) | URL for image, should be in PNG format. The image is shown in the MobilePay App when the user is prompted to approve the payment
-  *Onboard* | boolean | Whether merchant is ready to make live payments. Onboard merchants are elligible for subscription fees. Defaults to false
-
-* **Success Response:**
-
-   HTTP 200
-   ```javascript
-    {
-      Name: null, 
-      LogoUrl: "https://sunset-boulevard.dk/logo.png",
-      Onboard: false
-    }
-    ```
-    
-* **Error Response:**
-
-   * 401 if there was an authentication problem
-   * 400 if there was a validation problem with the request
-   * 404 if the merchant could not be found
-
-* **Sample Call:**
-
-   ```javascript
-    {
-      LogoUrl: "https://sunset-boulevard.dk/logo.png",
-      Onboard: false
-    }
-   ```
-
-* **Notes**
-   
-   At the time of writing, only the Name, LogoUrl and Onboard parameters can be changed. If something else needs to be changed a new Merchant must be created. The response that comes back will contain a copy of the values that were changed, and it will contain null values for other merchant properties which can be changed but were not in this request.
