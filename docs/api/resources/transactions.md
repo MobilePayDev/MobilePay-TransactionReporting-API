@@ -37,7 +37,7 @@ Returns a list of all transactions that took place during specified time period 
               "CustomBulkId" : null,
               "Timestamp": "2018-06-13T04:44:06Z",
               "PaymentTransactionId" : "AABBCCDD11223344",
-              "TransferReference" : "FI20180624123456789",
+              "TransferReference" : "00020180624123456789",
               "TransferReferenceDate" : "2018-06-24",
               "SenderComment" : "This is fun",
               "CustomPaymentId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1"
