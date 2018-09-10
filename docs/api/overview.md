@@ -15,7 +15,7 @@ All requests to the API should have the following HTTP headers:
 
 All request bodies are a JSON object, the parameters described in tables in the documentation for each resource are properties of the top-level object. UTF-8 character encoding should be used. 
 
-Many of the properties are enums or other specific types, and have strict validation rules applied to them by MobilePay. For more info see [API Types](types.MD).
+Many of the properties are enums or other specific types, and have strict validation rules applied to them by MobilePay. For more info see [API Types](types.md).
 
 ## Error codes
 
