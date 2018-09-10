@@ -61,7 +61,7 @@ Returns a list of transferred transactions that belong to a specified transfer r
   ReceiverAccount | string | Account number where funds have been transferred to. IBAN or regular account number.
   Transactions | json array | A collection of transactions (see below for details)
   Type | [Transaction type](../types.md#transaction-type) | Specifies transaction type. Possible values are: Payment, Refund, Fee, SentBackTransfer, Payout
-  Amount | [Admount](../types.md#amount) | Transaction amount. Positive for debit transactions, negative for credit transactions.
+  Amount | [Amount](../types.md#amount) | Transaction amount. Positive for debit transactions, negative for credit transactions.
   CurrencyCode | [Currency](../types.md#currency) | Transaction currency.
   CustomBulkId | string | Pass through reference provided by merchant for the transaction (optional).
   Timestamp | [Timestamp](../types.md#timestamp) | Timestamp when transaction has been completed.
@@ -69,9 +69,9 @@ Returns a list of transferred transactions that belong to a specified transfer r
   SenderComment | string | Free-form text message provided by payment sender (optional).
   CustomPaymentId | string | Custom payment id provided by merchant / payment integrator (optional).
   NumberOfEntries | integer | Displays how many transactions have been included in this transfer.
-  TotalValueOfTransactions | [Admount](../types.md#amount) | Total value of transactions excluding fees.
-  TotalValueOfFees | [Admount](../types.md#amount) | Total value of included transaction fees.
-  TotalTransferredAmount | [Admount](../types.md#amount) | Amount that was sent to receiver's account (total value - total fees)
+  TotalValueOfTransactions | [Amount](../types.md#amount) | Total value of transactions excluding fees.
+  TotalValueOfFees | [Amount](../types.md#amount) | Total value of included transaction fees.
+  TotalTransferredAmount | [Amount](../types.md#amount) | Amount that was sent to receiver's account (total value - total fees)
     
 * **Error Response:**
 
