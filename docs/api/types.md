@@ -35,3 +35,9 @@ string | All dates and times should be in UTC. The representation is an ISO 8601
 JSON type | Description | Examples
 ----------- | --------- | -------
 string | Bank transfer reference number. For transfers made in Finland corresponds to 20 digit Finland bank transfer reference. Format can vary according to country's banking infrastructure regulations. The reference is considered unique for a duration of 1 year. | "77060913004200000128"
+
+### Transaction type
+
+JSON | Description | Examples
+----------- | --------- | -------
+string | Enum representing supported transaction types | "Payment", "Refund", "Fee", "Transfer", "SentBackTransfer", "Payout"
