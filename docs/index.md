@@ -7,8 +7,8 @@
 
 ## API Endpoints
 
- - [Transactions Query](./api/resources/transactions.md)
  - [Transfer References Query](./api/resources/transfer-references.md)
+ - [Transactions Query](./api/resources/transactions.md) 
  - [Transferred Transactions Query](./api/resources/transferred-transactions.md)
  
  
