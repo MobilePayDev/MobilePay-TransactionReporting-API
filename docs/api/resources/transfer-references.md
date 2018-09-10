@@ -14,36 +14,42 @@ Returns a list of completed transfer references for a payment point.
 
     Name | Type | Detail
     ----- | ------ | ------
-    externalPaymentPointID | [GUID](../types.MD#guid) | Guid identifier for a payment point (not to confuse with payment point alias which is a digit)
+    externalPaymentPointID | [Guid](../types.md#guid) | Unique identifier for a payment point (not to confuse with payment point alias which is a digit)
+    fromDate | [Date](../types.md#Date) | Date to filter transfer reference results from (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
+    toDate | [Date](../types.md#Date) | Date to filter transfer reference results to (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
   
 * **Data Params**
 
-  Name | Type | Detail
-  ----- | ------ | ------
-  PspMerchantId | string | Equivalent of ShopId in existing system, this is the Psp's identifier for the merchant. Must be unique
-  Name | string | Merchant name
-  CountryCode | [Country](../types.MD#countrycode) | Country where merchant is based
-  VatNumber | string | CVR in Denmark, equivalent in other countries
-  SubscriptionBillingCurrency | [Currency](../types.MD#currency) | Which currency the Psp subscription fee will be received in
-  LogoUrl | [HttpsURL](../types.MD#httpsurl) | URL for image, should be in PNG format. The image is shown in the MobilePay App when the user is prompted to approve the payment
-  *Onboard* | boolean | Whether merchant is ready to make live payments. Onboard merchants are elligible for subscription fees. Defaults to false
+  None
 
 * **Success Response:**
 
    HTTP 200
    ```javascript
-    {
-      OnlineMerchantId: "b1a816b9-a36c-435b-a65b-0a608b3ff0bc",
-      PspId: "6f9a71c5-4a8b-4309-a286-e16879fb73c9",
-      PspMerchantId: "1",
-      Name: "Benie's Sunset",
-      CountryCode: "DK",
-      SubscriptionBillingCurrency: "DKK",
-      LogoUrl: "https://sunset-boulevard.dk/logo.png",
-      VatNumber: "99999999",
-      Onboard: false
-    }
+{
+    "TransferReferences": [
+        {
+            "TransferReference": "00020180624123456789",
+            "TransferReferenceDate" : "2018-06-24", // reference date, not the actual transfer time
+            "TotalTransferredAmount": 195.00,
+            "CurrencyCode": "DKK"
+        },
+        ...
+    ]
+}
     ```
+
+  Name | Type | Detail
+  ----- | ------ | ------
+  TransferReferences | json array | A collection of transfer reference lines (detailed below)
+  TransferReference | [Transfer reference](../types.md#transfer reference) | Bank transfer reference number. For transfers made in Finland corresponds to 20 digit Finland bank transfer reference. Format can vary according to country's banking infrastructure regulations. The reference is considered unique for a duration of 1 year.
+  MerchantName | string | Merchant legal name (as registered with MobilePay)
+  PaymentPointId | [Guid](../types.md#guid) | Unique identifier for a payment point. Corresponds to the provided url parameter.
+  PaymentPointName | string | The registered name of a payment point
+  ReceiverAccount | string | Account number where funds were transfered to
+  Transactions | json array | A collection of 
+  *Onboard* | boolean | Whether merchant is ready to make live payments. Onboard merchants are elligible for subscription fees. Defaults to false
+
     
 * **Error Response:**
 
