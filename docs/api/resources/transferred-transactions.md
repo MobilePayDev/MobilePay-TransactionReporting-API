@@ -28,8 +28,8 @@ Returns a list of transferred transactions that belong to a specified transfer r
       "PaymentPointId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1",
       "PaymentPointName" : "snack kiosk",
       "TransferReference" : "00020180624123456789",
-      "TransferReferenceDate" : "2018-06-24", // reference date, not the actual transfer time
-      "ReceiverAccount" : "DK123456789", // IBAN or regular account number
+      "TransferReferenceDate" : "2018-06-24",
+      "ReceiverAccount" : "DK123456789",
       "Transactions": [
           {
               "Type": "<Payment|Refund|Fee|SentBackTransfer|Payout>",
