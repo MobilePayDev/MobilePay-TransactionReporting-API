@@ -30,3 +30,8 @@ JSON type | Description | Examples
 string | All dates and times should be in UTC. The representation is an ISO 8601 24 character String | "2007-04-05T24:00:17.154Z"
 
 
+### Transfer reference
+
+JSON type | Description | Examples
+----------- | --------- | -------
+string | Bank transfer reference number. For transfers made in Finland corresponds to 20 digit Finland bank transfer reference. Format can vary according to country's banking infrastructure regulations. The reference is considered unique for a duration of 1 year. | "77060913004200000128"
