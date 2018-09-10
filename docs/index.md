@@ -5,10 +5,10 @@
  - [API Overview](./api/overview.md)
  - [API Types](./api/types.md)
 
-## API Resources
+## API Endpoints
 
- - [Transactions Query Endpoint](./api/resources/transactions.md)
- - [Transfer References Query Endpoint](./api/resources/transfer-references.md)
- - [Transferred Transactions Query Endpoint](./api/resources/transferred-transactions.md)
+ - [Transactions Query](./api/resources/transactions.md)
+ - [Transfer References Query](./api/resources/transfer-references.md)
+ - [Transferred Transactions Query](./api/resources/transferred-transactions.md)
  
  
