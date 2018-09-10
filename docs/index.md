@@ -3,7 +3,7 @@
 ## API Overview
 
  - [API Overview](./api/overview.md)
- - [API Types](./api/types.MD)
+ - [API Types](./api/types.md)
 
 ## API Resources
 
