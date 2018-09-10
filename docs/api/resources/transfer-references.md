@@ -8,67 +8,47 @@ Returns a list of completed transfer references for a payment point.
   
 * **Method**
 
-  POST
+  GET
 
 *  **URL Params**
 
     Name | Type | Detail
     ----- | ------ | ------
     externalPaymentPointID | [Guid](../types.md#guid) | Unique identifier for a payment point (not to confuse with payment point alias which is a digit)
-    fromDate | [Date](../types.md#Date) | Date to filter transfer reference results from (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
-    toDate | [Date](../types.md#Date) | Date to filter transfer reference results to (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
+    fromDate | [Date](../types.md#date) | Date to filter transfer reference results from (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
+    toDate | [Date](../types.md#date) | Date to filter transfer reference results to (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
   
-* **Data Params**
-
-  None
-
 * **Success Response:**
 
    HTTP 200
    ```javascript
-{
-    "TransferReferences": [
-        {
-            "TransferReference": "00020180624123456789",
-            "TransferReferenceDate" : "2018-06-24", // reference date, not the actual transfer time
-            "TotalTransferredAmount": 195.00,
-            "CurrencyCode": "DKK"
-        },
-        ...
-    ]
-}
+  {
+      "TransferReferences": [
+          {
+              "TransferReference": "00020180624123456789",
+              "TransferReferenceDate" : "2018-06-24",
+              "TotalTransferredAmount": 195.00,
+              "CurrencyCode": "DKK"
+          },
+          ...
+      ]
+  }
     ```
 
   Name | Type | Detail
   ----- | ------ | ------
-  TransferReferences | json array | A collection of transfer reference lines (detailed below)
-  TransferReference | [Transfer reference](../types.md#transfer reference) | Bank transfer reference number. For transfers made in Finland corresponds to 20 digit Finland bank transfer reference. Format can vary according to country's banking infrastructure regulations. The reference is considered unique for a duration of 1 year.
-  MerchantName | string | Merchant legal name (as registered with MobilePay)
-  PaymentPointId | [Guid](../types.md#guid) | Unique identifier for a payment point. Corresponds to the provided url parameter.
-  PaymentPointName | string | The registered name of a payment point
-  ReceiverAccount | string | Account number where funds were transfered to
-  Transactions | json array | A collection of 
-  *Onboard* | boolean | Whether merchant is ready to make live payments. Onboard merchants are elligible for subscription fees. Defaults to false
-
+  TransferReferences | json array | A collection of transfer reference lines (details below)
+  TransferReference | [Transfer reference](../types.md#transfer-reference) | Bank transfer reference number. Exact format can vary according to country's banking infrastructure regulations. The reference is considered unique for a duration of 1 year.
+  TransferReferenceDate | [Date](../types.md#date) | Transfer reference date. Corresponds to URL filter parameters "dateFrom" and "dateTo".
+  TotalTransferredAmount | [Amount](../types.md#amount) | Transferred amount.
+  CurrencyCode | [Currency](../types.md#currency) | Transfer currency.
     
 * **Error Response:**
 
-   * 401 if there was an authentication problem
-   * 400 if there was a validation problem with the request
-   * 409 if there was a logic error such as attempting to create duplicate merchant
-
-* **Sample Call:**
-
-   ```javascript
-    {
-      PspMerchantId: "1",
-      Name: "Benie's Sunset",
-      CountryCode: "DK",
-      SubscriptionBillingCurrency: "DKK",
-      LogoUrl: "https://sunset-boulevard.dk/logo.png",
-      VatNumber: "99999999"
-    }
-   ```
+   * 400 when there was a validation problem with the request
+   * 401 when required authentication headers are missing/invalid in the request
+   * 403 when user is not authorized to access the resource or user account is disabled
+   * 404 when payment point does not exist
 
 ## Edit Online Merchant
 
