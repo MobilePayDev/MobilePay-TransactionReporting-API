@@ -1,7 +1,7 @@
 
 # Transactions Query Endpoint
 
-Returns a list of all transactions that took place during specified time period for a payment point..
+Returns a list of all transactions that took place during specified time period for a payment point.
 
 * **URL**
 
@@ -55,7 +55,7 @@ Returns a list of all transactions that took place during specified time period 
   PaymentPointName | string | The registered name of a payment point.
   ReceiverAccount | string | Account number where funds have been transferred to. IBAN or regular account number.
   Transactions | json array | A collection of transactions (see below for details)
-  Type | [Transaction type](../types.md#transaction-type) | Specifies transaction type. Possible values are: Payment, Refund, Fee, SentBackTransfer, Payout
+  Type | [Transaction type](../types.md#transaction-type) | Specifies transaction type. Possible values are: Payment, Refund, Fee, Transfer, SentBackTransfer, Payout
   Amount | [Admount](../types.md#amount) | Transaction amount. Positive for debit transactions, negative for credit transactions.
   CurrencyCode | [Currency](../types.md#currency) | Transaction currency.
   CustomBulkId | string | Pass through reference provided by merchant for the transaction (optional).
