@@ -7,6 +7,8 @@
 
 ## API Resources
 
- - [Transfer References Resource](./api/resources/transfer-references.md)
- - [Transactions Resource](./api/resources/transactions.md)
+ - [Transactions Query Endpoint](./api/resources/transactions.md)
+ - [Transfer References Query Endpoint](./api/resources/transfer-references.md)
+ - [Transferred Transactions Query Endpoint](./api/resources/transferred-transactions.md)
+ 
  
