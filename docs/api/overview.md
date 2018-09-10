@@ -21,7 +21,7 @@ Many of the properties are enums or other specific types, and have strict valida
 
 In general the following error codes are possible. Error messages from the API are always in English, and are intended for developers, rather than to be shown to end users.
 
- * 400 for input validation errors. These will normally give detailed information including the specific parameters which were incorrect and examples of valid values where applicable. It is also returned if the query would return too many results.
+ * 400 for input validation errors. These will normally give detailed information including the specific parameters which were incorrect and examples of valid values where applicable. It is also returned if the query would yield too many results.
  * 401 is returned when required authentication headers are missing from the request.
  * 403 is returned for two cases: either user is not authorized to access specified resource or user is disabled.
  * 404 is used in the case of trying to query non existing resource. 
