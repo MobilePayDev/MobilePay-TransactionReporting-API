@@ -56,7 +56,7 @@ Returns a list of all transactions that took place during specified time period 
   ReceiverAccount | string | Account number where funds have been transferred to. IBAN or regular account number.
   Transactions | json array | A collection of transactions (see below for details)
   Type | [Transaction type](../types.md#transaction-type) | Specifies transaction type. Possible values are: Payment, Refund, Fee, Transfer, SentBackTransfer, Payout
-  Amount | [Admount](../types.md#amount) | Transaction amount. Positive for debit transactions, negative for credit transactions.
+  Amount | [Amount](../types.md#amount) | Transaction amount. Positive for debit transactions, negative for credit transactions.
   CurrencyCode | [Currency](../types.md#currency) | Transaction currency.
   CustomBulkId | string | Pass through reference provided by merchant for the transaction (optional).
   Timestamp | [Timestamp](../types.md#timestamp) | Timestamp when transaction has been completed. Corresponds to url parameters "fromDateTimeOffset" and "toDateTimeOffset".
