@@ -5,7 +5,7 @@ Returns a list of transferred transactions that belong to a specified transfer r
 
 * **URL**
 
-  /{externalPaymentPointID}/transfer/{transferReference}
+  /{paymentPointID}/transfer/{transferReference}
   
 * **Method**
 
@@ -15,7 +15,7 @@ Returns a list of transferred transactions that belong to a specified transfer r
 
     Name | Type | Detail
     ----- | ------ | ------
-    externalPaymentPointID | [Guid](../types.md#guid) | Unique identifier for a payment point (not to confuse with payment point alias which is a digit).
+    paymentPointID | [Guid](../types.md#guid) | Unique identifier for a payment point (not to confuse with payment point alias which is a digit).
     transferReference | [Transfer reference](../types.md#transfer-reference) | Bank reference number used for aggregated transfer to receiver account.
   
 * **Success Response:**
