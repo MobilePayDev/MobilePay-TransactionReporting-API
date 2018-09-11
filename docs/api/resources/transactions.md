@@ -5,7 +5,7 @@ Returns a list of all transactions that took place during specified time period 
 
 * **URL**
 
-  /{externalPaymentPointID}/transactions?from={fromDateTimeOffset}&to={toDateTimeOffset}
+  /{paymentPointID}/transactions?from={fromTimestamp}&to={toTimestamp}
   
 * **Method**
 
@@ -15,9 +15,9 @@ Returns a list of all transactions that took place during specified time period 
 
     Name | Type | Detail
     ----- | ------ | ------
-    externalPaymentPointID | [Guid](../types.md#guid) | Unique identifier for a payment point (not to confuse with payment point alias which is a digit)
-    fromDateTimeOffset | [Timestamp](../types.md#timestamp) | Timestamp to filter transactions from (inclusive). Refers to transaction timestamp.
-    toDateTimeOffset | [Timestamp](../types.md#timestamp) | Timestamp to filter transactions to (inclusive). Refers to transaction timestamp.
+    paymentPointID | [Guid](../types.md#guid) | Unique identifier for a payment point (not to confuse with payment point alias which is a digit)
+    fromTimestamp | [Timestamp](../types.md#timestamp) | Timestamp to filter transactions from (inclusive). Refers to transaction timestamp.
+    toTimestamp | [Timestamp](../types.md#timestamp) | Timestamp to filter transactions to (inclusive). Refers to transaction timestamp.
   
 * **Success Response:**
 
