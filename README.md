@@ -66,35 +66,23 @@ If you don't know the two process payment URLs at this point, it's OK to leave t
 
 ## Transaction Reporting API 
 
-### Making the first call
-Once your certificate and public key have been uploaded, you are ready to make the first call to our API. You can start by creating your first MobilePay Online Merchant. To create a merchant use POST /api/v1/online-merchants
+### Getting a list of transactions
+Once your certificate and public key have been uploaded, you are ready to query transactions as they arrive to MobilePay. Simply issue a [transactions GET request](docs/api/resources/transactions.md) 
 
-Make a POST to the endpoint https://api.sandbox.mobilepay.dk/online-restapi/api/v1/online-merchants with the following headers
+https://api.sandbox.mobilepay.dk/payment-transactionreporting-restapi/api/v1/{paymentPointId}/transactions?from={fromTimestamp}&to={toTimestamp} with the following headers
 
      accept: application/json
      content-type: application/json
      x-ibm-client-id: REPLACE_THIS_KEY
      x-ibm-client-secret: REPLACE_THIS_KEY
+   
+You will need to supply your client certificate each time you make a call for authentication. If successful you will receive an HTTP `200 OK` response with a JSON representation of the list of transactions.
 
-and the following body (make adjustments as needed for your own values):
+### Retrieving a list of transfer references
 
-    {
-      "PspMerchantId": "1",
-      "Name": "First Merchant",
-      "CountryCode": "dk",
-      "VatNumber": "1234567890",
-      "SubscriptionBillingCurrency": "dkk",
-      "LogoUrl": "https://www.google.com/logo.png",
-      "Onboard": false
-    }
-    
-You will need to supply your client certificate each time you make a call for authentication. If successful you will receive an HTTP `200 OK` response with a JSON representation of the new merchant, including an ID. This ID will be used when creating payments for this merchant.
+Usually accumulated payment point balance is transferred once per day to a specified merchant account. You might have to wait until next day to get transfer reference and the funds to appear in the bank account. Once the transfer has been made issue a transfer reference GET request with the same headers as above.
 
-For more information on creating merchants see [Online Merchant API docs](docs/api/resources/online-merchant.md) and for more general information about the API see [Online API Overview](docs/api/overview.md)
-
-### Creating a payment
-
-Once you have created an Online Merchant, payments can be created for this merchant using the URL https://api.sandbox.mobilepay.dk/online-restapi/api/v1/online-payments. Send a POST request with the same headers as above, and with a body like this:
+a transfer is started. transfer happen Once you have created an Online Merchant, payments can be created for this merchant using the URL https://api.sandbox.mobilepay.dk/online-restapi/api/v1/online-payments. Send a POST request with the same headers as above, and with a body like this:
 
     {
       "OnlineMerchantId": "9a97de32-35e8-4f78-8f14-c94787f7c40e",
