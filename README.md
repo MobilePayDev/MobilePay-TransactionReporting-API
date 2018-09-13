@@ -13,7 +13,7 @@ The Sandbox is designed to give developers a shielded environment for testing an
 
 #### Onboarding
 
-- Contact us at help@mobilepay.dk to request an invite to the Sandbox environment. 
+- Contact us at developer@mobilepay.dk to request an invite to the Sandbox environment. 
 - Once you have received the email invite, go to sandbox-developer.mobilepay.dk and log in with your credentials
 - Next you select your account > my Apps > Create new App to register a new application
 
