@@ -38,7 +38,7 @@ Certificates are used in our environments to provide an extra layer of security 
 For help on doing this, please see the [guide here](ClientCertificate.MD). Only the Sandbox certificate is needed for now, there's no need to create a production one at this time. Once you have created the certificate, you can move onto the next step and send us an email containing both items.
 
 #### Email us the certificate and public key
-When you have completed the step above, send an email to help@mobilepay.dk using the template below with a zip containing both the certificate and the public key. 
+When you have completed the step above, send an email to developer@mobilepay.dk using the template below with a zip containing both the certificate and the public key. Please zip it, as our e-mail server is quire sensitive. 
 
 This email should also contain the **client id** from the API gateway step above. We don't want the client secret, that should be kept somewhere safe and not shared. 
 
