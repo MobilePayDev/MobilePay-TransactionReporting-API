@@ -173,10 +173,7 @@ transferReference | [Transfer reference](../types.md#transfer-reference) | Bank 
           },
           ...
       ],
-      "NumberOfEntries": 4,
-      "TotalValueOfTransactions": 200.00,
-      "TotalValueOfFees": 5.00,
-      "TotalTransferredAmount": 195.00
+      "NextPageToken": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
   }
    ```
 
@@ -198,10 +195,7 @@ Timestamp | [Timestamp](../types.md#timestamp) | Timestamp when transaction has 
 PaymentTransactionId | string | Unique payment provider transaction id used when collecting funds for this individual transaction.  
 SenderComment | string | Free-form text message provided by payment sender (optional).
 CustomPaymentId | string | Custom payment id provided by merchant / payment integrator (optional).
-NumberOfEntries | integer | Displays how many transactions have been included in this transfer.
-TotalValueOfTransactions | [Amount](../types.md#amount) | Total value of transactions excluding fees.
-TotalValueOfFees | [Amount](../types.md#amount) | Total value of included transaction fees.
-TotalTransferredAmount | [Amount](../types.md#amount) | Amount that was sent to receiver's account (total value - total fees)
+NextPageToken | string | A token used to retrieve next page of results. Null if this is the last page.
     
 ### Error Response
 
@@ -268,7 +262,8 @@ toTimestamp | [Timestamp](../types.md#timestamp) | Timestamp to filter transacti
               "CustomPaymentId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1"
           },
           ...
-      ]
+      ],
+      "NextPageToken": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
   }
    ```
 
@@ -290,6 +285,7 @@ TransferReference | [Transfer reference](../types.md#transfer-reference) | Bank 
 TransferReferenceDate | [Date](../types.md#date) | Date used for aggregated transfer reference. Null if this transaction has not been transferred yet.
 SenderComment | string | Free-form text message provided by payment sender (optional).
 CustomPaymentId | string | Custom payment id provided by merchant / payment integrator (optional).
+NextPageToken | string | A token used to retrieve next page of results. Null if this is the last page.
     
 ### Error Response
 
