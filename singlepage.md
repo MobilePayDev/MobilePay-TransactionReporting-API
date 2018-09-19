@@ -32,45 +32,39 @@ Find the supported endpoints in the links below
 | Sandbox | https://api.sandbox.mobilepay.dk/merchant-authentication-openidconnect/.well-known/openid-configuration |
 | Production | https://api.mobilepay.dk/merchant-authentication-openidconnect/.well-known/openid-configuration |
 
-
-
-
-
 In order to authenticate to the API, all requests to the API must contain at least three authentication headers:
-x-ibm-client-id
-x-ibm-client-secret
-Authorization
+1. `x-ibm-client-id`
+2. `x-ibm-client-secret`
+3. `Authorization`
 
-#### Generate certificate
-Certificates are used in our environments to provide an extra layer of security for an API. In order to be authenticated to our REST-services you have to provide a certificate, which can be self-signed if preferred. The certifcate can be generated either using makecert.exe or OpenSSL.  
+`$ curl --header "Authorization: Bearer <token>" --header 'x-ibm-client-id: client-id' --header 'x-ibm-client-secret: client-secret' --url https://<mobile-pay-root>/api/merchants/me/resource`
 
-For help on doing this, please see the [guide here](ClientCertificate.MD). Only the Sandbox certificate is needed for now, there's no need to create a production one at this time. Once you have created the certificate, you can move onto the next step and send us an email containing both items.
+### Implementing OpenID Connect protocol
+Although the protocol is not that complicated, there is no need to implement it yourself! There are many OpenID Connect certified libraries for different platforms, so you just have to chose the one, that suits you best [from this list](http://openid.net/developers/certified/#RPLibs).
 
-#### Email us the certificate and public key
-When you have completed the step above, send an email to developer@mobilepay.dk using the template below with a zip containing both the certificate and the public key. Please zip it, as our e-mail server is quire sensitive. 
+## General notes
 
-This email should also contain the **client id** from the API gateway step above. We don't want the client secret, that should be kept somewhere safe and not shared. 
+MobilePay Transaction Reporting is a full-fledged HTTPS REST api using JSON as request/response communication media.
 
-If you don't know the two process payment URLs at this point, it's OK to leave these blank and we can continue the onboarding process without them. However you'll need to send a follow up with these before payments can be processed. 
+All dates and time-stamps use the ISO 8601 format: date format - `YYYY-MM-DD`, date-time format - `YYYY-MM-DDTHH:mm:ssZ`.
 
-    Subject: MobilePay Transaction Reporting Sandbox Registration
-    
-    Hi,
+When submitting requests, `Content-Type: application/json` HTTP header must be provided. UTF-8 character encoding should be used.
 
-    Please find attached our SSL certificate and public key for the MobilePay Transaction Reporting Sandbox. Could 
-    you register this with the API gateway and add us to the system?
-   
-    Here are our details for the registration: 
-    
-    Client-Id: b45f5873-cea6-40a2-82e5-81906817d680
-    CVR/VATNumber: 1234567890
-    PartnerID: <from existing integration if applicable>
-    ContactEmail: enquiries@newpay.com
-    TechnicalContactEmail: techsupport@newpay.com
-    TechnicalContactPhone: +4512345678
-        
-    Thanks
-    <Name>
+`$ curl --request GET --header 'Content-Type: application/json' --url https://<mobile-pay-root>/resource`
+
+### Error codes
+
+In general the following error codes are possible. Error messages from the API are always in English, and are intended for developers, rather than to be shown to end users.
+
+ * 400 for input validation errors. These will normally give detailed information including the specific parameters which were incorrect and examples of valid values where applicable. It is also returned if the query would yield too many results.
+ * 401 is returned when required authentication headers are missing from the request.
+ * 403 is returned for two cases: either user is not authorized to access specified resource or user is disabled.
+ * 404 is used in the case of trying to query non existing resource. 
+ * 412 is used to indicate that resource exists but is not yet ready for use (for long running reports).
+ * 500 can happen if something unexpected goes wrong in the API, e.g. an unhandled exception. There is likely to be quite limited error information available in this case and it's best to contact MobilePay, providing details of what request caused the problem and when it was done. One form of 500 error that may be observed is a TimeoutException, which can ocurr when the API server did not receive an expected event after sending a command into the system to be executed. This error should be treated like other unhandled exceptions and reported, rather than ignored like a network timeout might be.
+
+
+
 
 
 ## Transaction Reporting API 
@@ -103,50 +97,21 @@ https://api.sandbox.mobilepay.dk/payment-transactionreporting-restapi/api/v1/{pa
 
 If successful you will receive an HTTP `200 OK` response with a JSON representation of the list of transactions.
 
-# Mobile Pay Transaction Reporting API
-
-This document contains details on aspects of the MobilePay Transaction Reporting API which are common to all endpoints/resources.
-
-## Headers
-
-All requests to the API should have the following HTTP headers:
-
-    accept: application/json
-    content-type: application/json
-    x-ibm-client-id: REPLACE_THIS_KEY
-    x-ibm-client-secret: REPLACE_THIS_KEY
-
-## Request bodies
-
-All request bodies are a JSON object, the parameters described in tables in the documentation for each resource are properties of the top-level object. UTF-8 character encoding should be used. 
-
-Many of the properties are enums or other specific types, and have strict validation rules applied to them by MobilePay. For more info see [API Types](types.md).
-
-## Error codes
-
-In general the following error codes are possible. Error messages from the API are always in English, and are intended for developers, rather than to be shown to end users.
-
- * 400 for input validation errors. These will normally give detailed information including the specific parameters which were incorrect and examples of valid values where applicable. It is also returned if the query would yield too many results.
- * 401 is returned when required authentication headers are missing from the request.
- * 403 is returned for two cases: either user is not authorized to access specified resource or user is disabled.
- * 404 is used in the case of trying to query non existing resource. 
- * 412 is used to indicate that resource exists but is not yet ready for use (for long running reports).
- 
-  * 500 can happen if something unexpected goes wrong in the API, e.g. an unhandled exception. There is likely to be quite limited error information available in this case and it's best to contact MobilePay, providing details of what request caused the problem and when it was done. One form of 500 error that may be observed is a TimeoutException, which can ocurr when the API server did not receive an expected event after sending a command into the system to be executed. This error should be treated like other unhandled exceptions and reported, rather than ignored like a network timeout might be.
-
-# Transfer References Query Endpoint
+## Transfer References Endpoint
 
 Returns a list of completed transfer references for a payment point.
 
-* **URL**
+Usually accumulated payment point balance is transferred once per day to a specified merchant account. You might have to wait until next day to get transfer reference and for the funds to appear in the bank account.
 
-  /{paymentPointID}/transfer-references?from={fromDate}&to={toDate}
+### URL
+
+  `/payment-transactionreporting-restapi/api/v1/{paymentPointID}/transfer-references?from={fromDate}&to={toDate}`
   
-* **Method**
+### Method
 
-  GET
+  `GET`
 
-*  **URL Params**
+### URL Params
 
     Name | Type | Detail
     ----- | ------ | ------
@@ -154,10 +119,10 @@ Returns a list of completed transfer references for a payment point.
     fromDate | [Date](../types.md#date) | Date to filter transfer reference results from (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
     toDate | [Date](../types.md#date) | Date to filter transfer reference results to (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
   
-* **Success Response:**
+### Success Response:
 
    HTTP 200
-   ```javascript
+  ```javascript
   {
       "TransferReferences": [
           {
@@ -169,24 +134,33 @@ Returns a list of completed transfer references for a payment point.
           ...
       ]
   }
-    ```
+  ```
 
-  Name | Type | Detail
-  ----- | ------ | ------
-  TransferReferences | json array | A collection of transfer reference lines (details below)
-  TransferReference | [Transfer reference](../types.md#transfer-reference) | Bank transfer reference number. Exact format can vary according to country's banking infrastructure regulations. The reference is considered unique for a duration of 1 year.
-  TransferReferenceDate | [Date](../types.md#date) | Transfer reference date. Corresponds to URL filter parameters "dateFrom" and "dateTo".
-  TotalTransferredAmount | [Amount](../types.md#amount) | Transferred amount.
-  CurrencyCode | [Currency](../types.md#currency) | Transfer currency.
+Name | Type | Detail
+----- | ------ | ------
+TransferReferences | json array | A collection of transfer reference lines (details below)
+TransferReference | [Transfer reference](../types.md#transfer-reference) | Bank transfer reference number. Exact format can vary according to country's banking infrastructure regulations. The reference is considered unique for a duration of 1 year.
+TransferReferenceDate | [Date](../types.md#date) | Transfer reference date. Corresponds to URL filter parameters "dateFrom" and "dateTo".
+TotalTransferredAmount | [Amount](../types.md#amount) | Transferred amount.
+CurrencyCode | [Currency](../types.md#currency) | Transfer currency.
     
-* **Error Response:**
+### Error Response:
 
    * 400 when there was a validation problem with the request
    * 401 when required authentication headers are missing/invalid in the request
    * 403 when user is not authorized to access the resource or user account is disabled
    * 404 when payment point does not exist
    
- # Transferred Transactions Query Endpoint
+### Sandbox example
+
+`$ curl 
+  --header "Authorization: Bearer abcd1234567890" 
+  --header 'x-ibm-client-id: abcd1234567890' 
+  --header 'x-ibm-client-secret: abcd1234567890'
+  --header 'Content-Type: application/json'
+  --url https://api.sandbox.mobilepay.dk/payment-transactionreporting-restapi/api/v1/37b8450b-579b-489d-8698-c7800c65934c/transfer-references?from=2018-09-18&to=2018-09-23`
+   
+## Transferred Transactions Query Endpoint
 
 Returns a list of transferred transactions that belong to a specified transfer reference.
 
