@@ -125,9 +125,9 @@ Returns a list of completed transfer references for a payment point.
 
 Name | Type | Required | Detail
 ----- |:-----:|:-----:| -----
-paymentPointID | [Guid](../types.md#guid) | Yes | Unique identifier for a payment point (not to confuse with payment point alias which is a digit)
-fromDate | [Date](../types.md#date) | Yes | Date to filter transfer reference results from (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
-toDate | [Date](../types.md#date) | Yes | Date to filter transfer reference results to (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
+paymentPointID | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a payment point (not to confuse with payment point alias which is a digit)
+fromDate | [Date](docs/api/types.md#date) | Yes | Date to filter transfer reference results from (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
+toDate | [Date](docs/api/types.md#date) | Yes | Date to filter transfer reference results to (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
   
 ### Success Response
 
@@ -149,10 +149,10 @@ toDate | [Date](../types.md#date) | Yes | Date to filter transfer reference resu
 Name | Type | Required | Detail
 ----- |:-----:|:-----:| -----
 TransferReferences | json array | Yes | A collection of transfer reference lines (details below)
-TransferReference | [Transfer reference](../types.md#transfer-reference) | Yes | Bank transfer reference number. Exact format can vary according to country's banking infrastructure regulations. The reference is considered unique for a duration of 1 year.
-TransferReferenceDate | [Date](../types.md#date) | Yes | Transfer reference date. Corresponds to URL filter parameters "dateFrom" and "dateTo".
-TotalTransferredAmount | [Amount](../types.md#amount) | Yes | Transferred amount.
-CurrencyCode | [Currency](../types.md#currency) | Yes | Transfer currency.
+TransferReference | [Transfer reference](docs/api/types.md#transfer-reference) | Yes | Bank transfer reference number. Exact format can vary according to country's banking infrastructure regulations. The reference is considered unique for a duration of 1 year.
+TransferReferenceDate | [Date](docs/api/types.md#date) | Yes | Transfer reference date. Corresponds to URL filter parameters "dateFrom" and "dateTo".
+TotalTransferredAmount | [Amount](docs/api/types.md#amount) | Yes | Transferred amount.
+CurrencyCode | [Currency](docs/api/types.md#currency) | Yes | Transfer currency.
     
 ### Error Response
 
@@ -189,9 +189,9 @@ When a payment point transfer has been completed, you can retrieve a list of tra
 
 Name | Type | Required | Detail
 ----- |:-----:|:-----:| -----
-paymentPointID | [Guid](../types.md#guid) | Yes | Unique identifier for a payment point (not to confuse with payment point alias which is a digit).
-transferReference | [Transfer reference](../types.md#transfer-reference) | Yes | Bank reference number used for aggregated transfer to receiver account.
-pageToken | [Page token](../types.md#page-token) | No | Specifies which result data page to retrieve if there are more than one page
+paymentPointID | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a payment point (not to confuse with payment point alias which is a digit).
+transferReference | [Transfer reference](docs/api/types.md#transfer-reference) | Yes | Bank reference number used for aggregated transfer to receiver account.
+pageToken | [Page token](docs/api/types.md#page-token) | No | Specifies which result data page to retrieve if there are more than one page
   
 ### Success Response
 
@@ -226,21 +226,21 @@ Name | Type | Required | Detail
 ----- |:-----:|:-----:| -----
 MerchantId | string | Yes | Public merchant identifier (usually VAT or CVR code)
 MerchantName | string | Yes | Merchant legal name (as registered with MobilePay)
-PaymentPointId | [Guid](../types.md#guid) | Yes | Unique identifier for a payment point. Corresponds to the provided url parameter.
+PaymentPointId | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a payment point. Corresponds to the provided url parameter.
 PaymentPointName | string | Yes | The registered name of a payment point.
-TransferReference | [Transfer reference](../types.md#transfer-reference) | Yes | Bank reference number used for aggregated transfer to receiver account. Corresponds to url parameter.
-TransferReferenceDate | [Date](../types.md#date) | Yes | Date used for aggregated transfer reference. Might be different from the date when transfer actually was made.
+TransferReference | [Transfer reference](docs/api/types.md#transfer-reference) | Yes | Bank reference number used for aggregated transfer to receiver account. Corresponds to url parameter.
+TransferReferenceDate | [Date](docs/api/types.md#date) | Yes | Date used for aggregated transfer reference. Might be different from the date when transfer actually was made.
 ReceiverAccount | string | Yes | Account number where funds have been transferred to. IBAN or regular account number.
 Transactions | json array | Yes | A collection of transactions (see below for details)
-Type | [Transaction type](../types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, Fee, SentBackTransfer, Payout
-Amount | [Amount](../types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
-CurrencyCode | [Currency](../types.md#currency) | Yes | Transaction currency.
+Type | [Transaction type](docs/api/types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, Fee, SentBackTransfer, Payout
+Amount | [Amount](docs/api/types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
+CurrencyCode | [Currency](docs/api/types.md#currency) | Yes | Transaction currency.
 CustomBulkId | string | No | Pass through reference provided by merchant for the transaction.
-Timestamp | [Timestamp](../types.md#timestamp) | Yes | Timestamp when transaction has been completed.
+Timestamp | [Timestamp](docs/api/types.md#timestamp) | Yes | Timestamp when transaction has been completed.
 PaymentTransactionId | string | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.  
 SenderComment | string | No | Free-form text message provided by payment sender.
 CustomPaymentId | string | No | Custom payment id provided by merchant / payment integrator.
-NextPageToken | [Page token](../types.md#page-token) | No | A token used to retrieve next page of results. Null if this is the last page.
+NextPageToken | [Page token](docs/api/types.md#page-token) | No | A token used to retrieve next page of results. Null if this is the last page.
     
 ### Error Response
 
@@ -279,10 +279,10 @@ Returns a list of all transactions that took place during specified time period 
 
 Name | Type | Required | Detail
 ----- |:-----:|:-----:| -----
-paymentPointID | [Guid](../types.md#guid) | Yes | Unique identifier for a payment point (not to confuse with payment point alias which is a digit)
-fromTimestamp | [Timestamp](../types.md#timestamp) | Yes | Timestamp to filter transactions from (inclusive). Refers to transaction timestamp.
-toTimestamp | [Timestamp](../types.md#timestamp) | Yes |Timestamp to filter transactions to (inclusive). Refers to transaction timestamp.
-pageToken | [Page token](../types.md#page-token) | No | Specifies which result data page to retrieve if there are more than one page
+paymentPointID | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a payment point (not to confuse with payment point alias which is a digit)
+fromTimestamp | [Timestamp](docs/api/types.md#timestamp) | Yes | Timestamp to filter transactions from (inclusive). Refers to transaction timestamp.
+toTimestamp | [Timestamp](docs/api/types.md#timestamp) | Yes |Timestamp to filter transactions to (inclusive). Refers to transaction timestamp.
+pageToken | [Page token](docs/api/types.md#page-token) | No | Specifies which result data page to retrieve if there are more than one page
   
 ### Success Response
 
@@ -317,21 +317,21 @@ Name | Type | Required | Detail
 ----- |:-----:|:-----:| -----
 MerchantId | string | Yes | Public merchant identifier (usually VAT or CVR code)
 MerchantName | string | Yes | Merchant legal name (as registered with MobilePay)
-PaymentPointId | [Guid](../types.md#guid) | Yes | Unique identifier for a payment point. Corresponds to the provided url parameter.
+PaymentPointId | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a payment point. Corresponds to the provided url parameter.
 PaymentPointName | string | Yes | The registered name of a payment point.
 ReceiverAccount | string | Yes | Account number where funds have been transferred to. IBAN or regular account number.
 Transactions | json array | Yes | A collection of transactions (see below for details)
-Type | [Transaction type](../types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, Fee, Transfer, SentBackTransfer, Payout
-Amount | [Amount](../types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
-CurrencyCode | [Currency](../types.md#currency) | Yes | Transaction currency.
+Type | [Transaction type](docs/api/types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, Fee, Transfer, SentBackTransfer, Payout
+Amount | [Amount](docs/api/types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
+CurrencyCode | [Currency](docs/api/types.md#currency) | Yes | Transaction currency.
 CustomBulkId | string | No | Pass through reference provided by merchant for the transaction.
-Timestamp | [Timestamp](../types.md#timestamp) | Yes | Timestamp when transaction has been completed. Corresponds to url parameters "fromDateTimeOffset" and "toDateTimeOffset".
+Timestamp | [Timestamp](docs/api/types.md#timestamp) | Yes | Timestamp when transaction has been completed. Corresponds to url parameters "fromDateTimeOffset" and "toDateTimeOffset".
 PaymentTransactionId | string | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.
-TransferReference | [Transfer reference](../types.md#transfer-reference) | No | Bank reference number used for aggregated transfer to receiver account. Null if this transaction has not been transferred yet.
-TransferReferenceDate | [Date](../types.md#date) | No | Date used for aggregated transfer reference. Null if this transaction has not been transferred yet.
+TransferReference | [Transfer reference](docs/api/types.md#transfer-reference) | No | Bank reference number used for aggregated transfer to receiver account. Null if this transaction has not been transferred yet.
+TransferReferenceDate | [Date](docs/api/types.md#date) | No | Date used for aggregated transfer reference. Null if this transaction has not been transferred yet.
 SenderComment | string | No | Free-form text message provided by payment sender.
 CustomPaymentId | string | No | Custom payment id provided by merchant / payment integrator.
-NextPageToken | [Page token](../types.md#page-token) | No | A token used to retrieve next page of results. Null if this is the last page.
+NextPageToken | [Page token](docs/api/types.md#page-token) | No | A token used to retrieve next page of results. Null if this is the last page.
     
 ### Error Response
 
