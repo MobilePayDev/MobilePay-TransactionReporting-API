@@ -52,6 +52,50 @@ When submitting requests, `Content-Type: application/json` HTTP header must be p
 
 `$ curl --request GET --header 'Content-Type: application/json' --url https://<mobile-pay-root>/resource`
 
+### Result paging
+
+Some endpoint queries can return a large number of results. In order to deliver them efficiently over the network, data pagination is used. Query responses which have more than **1000 transactions** are automatically split into pages of 1000 records each.
+
+* A query of 859 transactions would produce a single page
+* A query of 1547 transactions would produce 2 pages
+* A query of 50000 transactions would produce 50 pages
+
+When data pagination is used `NextPageToken` property is returned inside of request body. You should append the value of this property to query url `pageToken` parameter in order to retrieve the next page. If returned `NextPageToken` property is missing or null then the last page had been reached.
+
+#### Paging example
+
+Iinitial query url is:
+`https://api.sandbox.mobilepay.dk/payment-transactionreporting-restapi/api/v1/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z`
+
+Returned response is:   
+   ```
+  {
+      "MerchantId": "123456789",
+      "MerchantName": "Acme Ltd",
+      "PaymentPointId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1",
+      "PaymentPointName" : "snack kiosk",
+      "ReceiverAccount" : "DK123456789",
+      "Transactions": [
+          {
+              "Type": "Payment",
+              "Amount": 81.00,
+              "CurrencyCode": "EUR",
+              "CustomBulkId" : null,
+              "Timestamp": "2018-06-13T04:44:06Z",
+              "PaymentTransactionId" : "AABBCCDD11223344",
+              "TransferReference" : "00020180624123456789",
+              "TransferReferenceDate" : "2018-06-24",
+              "SenderComment" : "This is fun",
+              "CustomPaymentId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1"
+          },
+          ...
+      ],
+      "NextPageToken": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+  }
+   ```
+In order to retrieve the next page, you shuould call:
+`https://api.sandbox.mobilepay.dk/payment-transactionreporting-restapi/api/v1/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA`
+
 ### Error codes
 
 In general the following error codes are possible. Error messages from the API are always in English, and are intended for developers, rather than to be shown to end users.
