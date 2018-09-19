@@ -80,7 +80,7 @@ Returns a list of completed transfer references for a payment point.
 ### URL Params
 
 Name | Type | Required | Detail
------ | ----- | ----- | -----
+----- |:-----:|:-----:| -----
 paymentPointID | [Guid](../types.md#guid) | Yes | Unique identifier for a payment point (not to confuse with payment point alias which is a digit)
 fromDate | [Date](../types.md#date) | Yes | Date to filter transfer reference results from (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
 toDate | [Date](../types.md#date) | Yes | Date to filter transfer reference results to (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
@@ -103,7 +103,7 @@ toDate | [Date](../types.md#date) | Yes | Date to filter transfer reference resu
   ```
 
 Name | Type | Required | Detail
------ | ----- | ----- | -----
+----- |:-----:|:-----:| -----
 TransferReferences | json array | Yes | A collection of transfer reference lines (details below)
 TransferReference | [Transfer reference](../types.md#transfer-reference) | Yes | Bank transfer reference number. Exact format can vary according to country's banking infrastructure regulations. The reference is considered unique for a duration of 1 year.
 TransferReferenceDate | [Date](../types.md#date) | Yes | Transfer reference date. Corresponds to URL filter parameters "dateFrom" and "dateTo".
@@ -134,7 +134,7 @@ When a payment point transfer has been completed, you can retrieve a list of tra
 
 ### URL
 
- `/payment-transactionreporting-restapi/api/v1/{paymentPointID}/transfer/{transferReference}`
+ `/payment-transactionreporting-restapi/api/v1/{paymentPointID}/transfer/{transferReference}?pageToken={pageToken}`
   
   
 ### Method
@@ -143,10 +143,11 @@ When a payment point transfer has been completed, you can retrieve a list of tra
 
 ### URL Params
 
-Name | Type | Detail
------ | ------ | ------
-paymentPointID | [Guid](../types.md#guid) | Unique identifier for a payment point (not to confuse with payment point alias which is a digit).
-transferReference | [Transfer reference](../types.md#transfer-reference) | Bank reference number used for aggregated transfer to receiver account.
+Name | Type | Required | Detail
+----- |:-----:|:-----:| -----
+paymentPointID | [Guid](../types.md#guid) | Yes | Unique identifier for a payment point (not to confuse with payment point alias which is a digit).
+transferReference | [Transfer reference](../types.md#transfer-reference) | Yes | Bank reference number used for aggregated transfer to receiver account.
+pageToken | [Page token](../types.md#page-token) | No | Specifies which result data page to retrieve if there are more than one page
   
 ### Success Response
 
@@ -177,25 +178,25 @@ transferReference | [Transfer reference](../types.md#transfer-reference) | Bank 
   }
    ```
 
-Name | Type | Detail
------ | ------ | ------
-MerchantId | string | Public merchant identifier (usually VAT or CVR code)
-MerchantName | string | Merchant legal name (as registered with MobilePay)
-PaymentPointId | [Guid](../types.md#guid) | Unique identifier for a payment point. Corresponds to the provided url parameter.
-PaymentPointName | string | The registered name of a payment point.
-TransferReference | [Transfer reference](../types.md#transfer-reference) | Bank reference number used for aggregated transfer to receiver account. Corresponds to url parameter.
-TransferReferenceDate | [Date](../types.md#date) | Date used for aggregated transfer reference. Might be different from the date when transfer actually was made.
-ReceiverAccount | string | Account number where funds have been transferred to. IBAN or regular account number.
-Transactions | json array | A collection of transactions (see below for details)
-Type | [Transaction type](../types.md#transaction-type) | Specifies transaction type. Possible values are: Payment, Refund, Fee, SentBackTransfer, Payout
-Amount | [Amount](../types.md#amount) | Transaction amount. Positive for debit transactions, negative for credit transactions.
-CurrencyCode | [Currency](../types.md#currency) | Transaction currency.
-CustomBulkId | string | Pass through reference provided by merchant for the transaction (optional).
-Timestamp | [Timestamp](../types.md#timestamp) | Timestamp when transaction has been completed.
-PaymentTransactionId | string | Unique payment provider transaction id used when collecting funds for this individual transaction.  
-SenderComment | string | Free-form text message provided by payment sender (optional).
-CustomPaymentId | string | Custom payment id provided by merchant / payment integrator (optional).
-NextPageToken | string | A token used to retrieve next page of results. Null if this is the last page.
+Name | Type | Required | Detail
+----- |:-----:|:-----:| -----
+MerchantId | string | Yes | Public merchant identifier (usually VAT or CVR code)
+MerchantName | string | Yes | Merchant legal name (as registered with MobilePay)
+PaymentPointId | [Guid](../types.md#guid) | Yes | Unique identifier for a payment point. Corresponds to the provided url parameter.
+PaymentPointName | string | Yes | The registered name of a payment point.
+TransferReference | [Transfer reference](../types.md#transfer-reference) | Yes | Bank reference number used for aggregated transfer to receiver account. Corresponds to url parameter.
+TransferReferenceDate | [Date](../types.md#date) | Yes | Date used for aggregated transfer reference. Might be different from the date when transfer actually was made.
+ReceiverAccount | string | Yes | Account number where funds have been transferred to. IBAN or regular account number.
+Transactions | json array | Yes | A collection of transactions (see below for details)
+Type | [Transaction type](../types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, Fee, SentBackTransfer, Payout
+Amount | [Amount](../types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
+CurrencyCode | [Currency](../types.md#currency) | Yes | Transaction currency.
+CustomBulkId | string | No | Pass through reference provided by merchant for the transaction.
+Timestamp | [Timestamp](../types.md#timestamp) | Yes | Timestamp when transaction has been completed.
+PaymentTransactionId | string | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.  
+SenderComment | string | No | Free-form text message provided by payment sender.
+CustomPaymentId | string | No | Custom payment id provided by merchant / payment integrator.
+NextPageToken | [Page token](../types.md#page-token) | No | A token used to retrieve next page of results. Null if this is the last page.
     
 ### Error Response
 
@@ -213,7 +214,7 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890' 
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Content-Type: application/json'
-  --url https://api.sandbox.mobilepay.dk/payment-transactionreporting-restapi/api/v1/37b8450b-579b-489d-8698-c7800c65934c/transfer/00020180624123456789
+  --url https://api.sandbox.mobilepay.dk/payment-transactionreporting-restapi/api/v1/37b8450b-579b-489d-8698-c7800c65934c/transfer/00020180624123456789?pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```   
 
 ## Transactions Endpoint
@@ -224,7 +225,7 @@ Returns a list of all transactions that took place during specified time period 
 
 ### URL
 
-  `/payment-transactionreporting-restapi/api/v1/{paymentPointID}/transactions?from={fromTimestamp}&to={toTimestamp}`
+  `/payment-transactionreporting-restapi/api/v1/{paymentPointID}/transactions?from={fromTimestamp}&to={toTimestamp}&pageToken={pageToken}`
   
 ### Method
 
@@ -232,11 +233,12 @@ Returns a list of all transactions that took place during specified time period 
 
 ### URL Params
 
-Name | Type | Detail
------ | ------ | ------
-paymentPointID | [Guid](../types.md#guid) | Unique identifier for a payment point (not to confuse with payment point alias which is a digit)
-fromTimestamp | [Timestamp](../types.md#timestamp) | Timestamp to filter transactions from (inclusive). Refers to transaction timestamp.
-toTimestamp | [Timestamp](../types.md#timestamp) | Timestamp to filter transactions to (inclusive). Refers to transaction timestamp.
+Name | Type | Required | Detail
+----- |:-----:|:-----:| -----
+paymentPointID | [Guid](../types.md#guid) | Yes | Unique identifier for a payment point (not to confuse with payment point alias which is a digit)
+fromTimestamp | [Timestamp](../types.md#timestamp) | Yes | Timestamp to filter transactions from (inclusive). Refers to transaction timestamp.
+toTimestamp | [Timestamp](../types.md#timestamp) | Yes |Timestamp to filter transactions to (inclusive). Refers to transaction timestamp.
+pageToken | [Page token](../types.md#page-token) | No | Specifies which result data page to retrieve if there are more than one page
   
 ### Success Response
 
@@ -267,25 +269,25 @@ toTimestamp | [Timestamp](../types.md#timestamp) | Timestamp to filter transacti
   }
    ```
 
-Name | Type | Detail
------ | ------ | ------
-MerchantId | string | Public merchant identifier (usually VAT or CVR code)
-MerchantName | string | Merchant legal name (as registered with MobilePay)
-PaymentPointId | [Guid](../types.md#guid) | Unique identifier for a payment point. Corresponds to the provided url parameter.
-PaymentPointName | string | The registered name of a payment point.
-ReceiverAccount | string | Account number where funds have been transferred to. IBAN or regular account number.
-Transactions | json array | A collection of transactions (see below for details)
-Type | [Transaction type](../types.md#transaction-type) | Specifies transaction type. Possible values are: Payment, Refund, Fee, Transfer, SentBackTransfer, Payout
-Amount | [Amount](../types.md#amount) | Transaction amount. Positive for debit transactions, negative for credit transactions.
-CurrencyCode | [Currency](../types.md#currency) | Transaction currency.
-CustomBulkId | string | Pass through reference provided by merchant for the transaction (optional).
-Timestamp | [Timestamp](../types.md#timestamp) | Timestamp when transaction has been completed. Corresponds to url parameters "fromDateTimeOffset" and "toDateTimeOffset".
-PaymentTransactionId | string | Unique payment provider transaction id used when collecting funds for this individual transaction.
-TransferReference | [Transfer reference](../types.md#transfer-reference) | Bank reference number used for aggregated transfer to receiver account. Null if this transaction has not been transferred yet.
-TransferReferenceDate | [Date](../types.md#date) | Date used for aggregated transfer reference. Null if this transaction has not been transferred yet.
-SenderComment | string | Free-form text message provided by payment sender (optional).
-CustomPaymentId | string | Custom payment id provided by merchant / payment integrator (optional).
-NextPageToken | string | A token used to retrieve next page of results. Null if this is the last page.
+Name | Type | Required | Detail
+----- |:-----:|:-----:| -----
+MerchantId | string | Yes | Public merchant identifier (usually VAT or CVR code)
+MerchantName | string | Yes | Merchant legal name (as registered with MobilePay)
+PaymentPointId | [Guid](../types.md#guid) | Yes | Unique identifier for a payment point. Corresponds to the provided url parameter.
+PaymentPointName | string | Yes | The registered name of a payment point.
+ReceiverAccount | string | Yes | Account number where funds have been transferred to. IBAN or regular account number.
+Transactions | json array | Yes | A collection of transactions (see below for details)
+Type | [Transaction type](../types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, Fee, Transfer, SentBackTransfer, Payout
+Amount | [Amount](../types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
+CurrencyCode | [Currency](../types.md#currency) | Yes | Transaction currency.
+CustomBulkId | string | No | Pass through reference provided by merchant for the transaction.
+Timestamp | [Timestamp](../types.md#timestamp) | Yes | Timestamp when transaction has been completed. Corresponds to url parameters "fromDateTimeOffset" and "toDateTimeOffset".
+PaymentTransactionId | string | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.
+TransferReference | [Transfer reference](../types.md#transfer-reference) | No | Bank reference number used for aggregated transfer to receiver account. Null if this transaction has not been transferred yet.
+TransferReferenceDate | [Date](../types.md#date) | No | Date used for aggregated transfer reference. Null if this transaction has not been transferred yet.
+SenderComment | string | No | Free-form text message provided by payment sender.
+CustomPaymentId | string | No | Custom payment id provided by merchant / payment integrator.
+NextPageToken | [Page token](../types.md#page-token) | No | A token used to retrieve next page of results. Null if this is the last page.
     
 ### Error Response
 
@@ -302,5 +304,5 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890' 
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Content-Type: application/json'
-  --url https://api.sandbox.mobilepay.dk/payment-transactionreporting-restapi/api/v1/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z
+  --url https://api.sandbox.mobilepay.dk/payment-transactionreporting-restapi/api/v1/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```   
