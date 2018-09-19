@@ -41,3 +41,9 @@ string | Bank transfer reference number. For transfers made in Finland correspon
 JSON | Description | Examples
 ----------- | --------- | -------
 string | Enum representing supported transaction types | "Payment", "Refund", "Fee", "Transfer", "SentBackTransfer", "Payout"
+
+### Page token
+
+JSON type | Description | Examples
+----------- | --------- | -------
+string | Unique page identifier when there are multiple pages of results | "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
