@@ -1,5 +1,5 @@
 ## Overview
-MobilePay Transaction Reporting allows to query all activities taking place in a payment point.
+MobilePay Transaction Reporting allows to query all activities taking place at any of your MobilePay payment locations.
 
 This document explains how to make a technical integration to the MobilePay Transaction Reporting product. The intended audience is technical integrators either from merchant itself, or from Payment Service Providers or from Partner Banks.
 
