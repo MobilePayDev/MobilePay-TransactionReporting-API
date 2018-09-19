@@ -1,7 +1,7 @@
 ## Overview
 MobilePay Transaction Reporting allows to query all activities taking place at any of your MobilePay payment locations.
 
-This document explains how to make a technical integration to the MobilePay Transaction Reporting product. The intended audience is technical integrators either from merchant itself, or from Payment Service Providers or from Partner Banks.
+This document explains how to make a technical integration to the MobilePay Transaction Reporting product. The intended audience is technical integrators from merchant itself, or from Partner Banks.
 
 ### Merchant onboarding
 You enroll to the Transaction Reporting via www.MobilePay.dk or the MobilePay Business Administration portal. Then you get access to the MobilePay Sandbox environment, where you can test the technical integration. The environment is located on [The Developer Portal](https://sandbox-developer.mobilepay.dk/) 
@@ -11,6 +11,32 @@ In order to call our APIs from your systems you might need to whitelist our endp
 | Service        | Sandbox           | Production  |
 | ------------- |:-------------:| -----:|
 | API Gateway | https://api.sandbox.mobilepay.dk | https://api.mobilepay.dk |
+
+## Authentication
+### OpenID Connect
+When the merchant is onboarded, he has a user in MobilePay that is able to manage which products the merchant wishes to use. Not all merchants have the technical capabilities to make integrations to MobilePay, instead they may need to go through applications with these capabilities. The OpenID Connect protocol is a simple identity layer on top of the OAuth 2.0 protocol.
+
+Client: In order for this to work, the merchant must grant consent to an application(Client) with these capabilities. The client is the application that is attempting to get access to the user’s account. The client needs to get consent from the user before it can do so. This consent is granted through mechanism in the [OpenID Connect](http://openid.net/connect/) protocol suite.
+
+Integrators are the same as Clients in the OAuth 2.0 protocol. The first thing that must be done as a Client is to go and [register here](https://www.mobilepay.dk/da-dk/Erhverv/Pages/MobilePay-integrator.aspx). Once this is done the Client must initiate the [hybrid flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth) specified in OpenID connect. For Transaction Reporting product the Client must request consent from the merchant using the transaction_reporting scope. Scopes are like permissions or delegated rights that the Resource Owner wishes the client to be able to do on their behalf. You also need to specify offline_access scope, in order to get the refresh token. The authorization server in sandbox is [located here](https://api.sandbox.mobilepay.dk/merchant-authentication-openidconnect).
+
+If the merchant grants consent, an authorization code is returned which the Client must exchange for an id token, an access token and a refresh token. The refresh token is used to refresh ended sessions without asking for merchant consent again. This means that if the Client receives an answer from the api gateway saying that the access token is invalid, the refresh token is exchanged for a new access token and refresh token. 
+
+An example of how to use OpenID connect in C# [can be found here](https://github.com/MobilePayDev/MobilePay-Invoice/tree/master/ClientExamples).
+### Supported Endpoints
+Find the supported endpoints in the links below
+| Environment   | Link           |
+| ------------- | -------------:| -----:|
+| Sandbox | https://api.sandbox.mobilepay.dk | https://api.mobilepay.dk |
+
+
+https://api.sandbox.mobilepay.dk/merchant-authentication-openidconnect/.well-known/openid-configuration
+Production
+https://api.mobilepay.dk/merchant-authentication-openidconnect/.well-known/openid-configuration
+In order to authenticate to the API, all requests to the API must contain at least three authentication headers:
+x-ibm-client-id
+x-ibm-client-secret
+Authorization
 
 #### Generate certificate
 Certificates are used in our environments to provide an extra layer of security for an API. In order to be authenticated to our REST-services you have to provide a certificate, which can be self-signed if preferred. The certifcate can be generated either using makecert.exe or OpenSSL.  
