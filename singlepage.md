@@ -1,36 +1,16 @@
-# MobilePay Transaction Reporting
-
-### Overview
-MobilePay Transaction Reporting allows to query customer transactions made to a payment point and it's outgoing transfers to receiver's account. 
+## Overview
+MobilePay Transaction Reporting allows to query all activities taking place in a payment point.
 
 This document explains how to make a technical integration to the MobilePay Transaction Reporting product. The intended audience is technical integrators either from merchant itself, or from Payment Service Providers or from Partner Banks.
 
-## Integration
-Integrating to MobilePay Transaction Reporting is a multistep process involving creating an application interacting with our systems via our API gateway and calling the provided RESTful APIs. In the sections below, the following steps will be explained.
-
-### Sandbox
-The Sandbox is designed to give developers a shielded environment for testing and integration purposes. Sandboxes are isolated from your production organization and give you the ability to safely explore the API platform. 
-
-#### Onboarding
-
-- Contact us at developer@mobilepay.dk to request an invite to the Sandbox environment. 
-- Once you have received the email invite, go to sandbox-developer.mobilepay.dk and log in with your credentials
-- Next you select your account > my Apps > Create new App to register a new application
-
-> **IMPORTANT**: Please make a note of your Client Secret as you'll only see this once
-
-> **TIP**: You should always store the Client Secret in a secure location, and never reveal it publicly. If you suspect that the secret key has been compromised, you may reset it immediately by clicking the link on the application details page.
-
-To implement MobilePay Transaction Reporting, go to APIs and subscribe to "Transaction Reporting for Partners".
-
-From the API-page you're able to call the api and get the appropiate responses.
+### Merchant onboarding
+You enroll to the Transaction Reporting via www.MobilePay.dk or the MobilePay Business Administration portal. Then you get access to the MobilePay Sandbox environment, where you can test the technical integration. The environment is located on [The Developer Portal](https://sandbox-developer.mobilepay.dk/) 
 
 In order to call our APIs from your systems you might need to whitelist our endpoints:
 
 | Service        | Sandbox           | Production  |
 | ------------- |:-------------:| -----:|
-| API Gateway | api.sandbox.mobilepay.dk | TBC |
-| Process payment callback |  TBC | TBC |
+| API Gateway | https://api.sandbox.mobilepay.dk | https://api.mobilepay.dk |
 
 #### Generate certificate
 Certificates are used in our environments to provide an extra layer of security for an API. In order to be authenticated to our REST-services you have to provide a certificate, which can be self-signed if preferred. The certifcate can be generated either using makecert.exe or OpenSSL.  
