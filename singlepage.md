@@ -25,10 +25,11 @@ If the merchant grants consent, an authorization code is returned which the Clie
 An example of how to use OpenID connect in C# [can be found here](https://github.com/MobilePayDev/MobilePay-Invoice/tree/master/ClientExamples).
 ### Supported Endpoints
 Find the supported endpoints in the links below
- | Environment   | Link |
- | ------------- | -------------: |
- | Sandbox | https://api.sandbox.mobilepay.dk/merchant-authentication-openidconnect/.well-known/openid-configuration |
- | Production | https://api.mobilepay.dk/merchant-authentication-openidconnect/.well-known/openid-configuration |
+
+| Environment   | Link |
+| ------------- | -------------: |
+| Sandbox | https://api.sandbox.mobilepay.dk/merchant-authentication-openidconnect/.well-known/openid-configuration |
+| Production | https://api.mobilepay.dk/merchant-authentication-openidconnect/.well-known/openid-configuration |
 
 
 
