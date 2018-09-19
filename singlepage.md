@@ -9,7 +9,7 @@ You enroll to the Transaction Reporting via www.MobilePay.dk or the MobilePay Bu
 In order to call our APIs from your systems you might need to whitelist our endpoints:
 
 | Service        | Sandbox           | Production  |
-| ------------- |:-------------:| -----:|
+| ------------- |:-------------:|:-----:|
 | API Gateway | https://api.sandbox.mobilepay.dk | https://api.mobilepay.dk |
 
 ## Authentication
