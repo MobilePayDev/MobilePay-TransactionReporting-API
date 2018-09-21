@@ -335,7 +335,7 @@ NextPageToken | [Page token](docs/api/types.md#page-token) | No | A token used t
     
 ### Error Response
 
-   * 400 when there was a validation problem with the request. Also when result count exceeds 20000 records.
+   * 400 when there was a validation problem with the request.
    * 401 when required authentication headers are missing/invalid in the request
    * 403 when user is not authorized to access the resource or user account is disabled
    * 404 when payment point does not exist
