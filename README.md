@@ -62,6 +62,8 @@ Some endpoint queries can return a large number of results. In order to deliver 
 
 When data pagination is used `NextPageToken` property is returned inside of request body. You should append the value of this property to query url `pageToken` parameter in order to retrieve the next page. If returned `NextPageToken` property is missing or null then the last page had been reached.
 
+**Important**: NextPageToken value can contain any base64 characters, including `/`, `+` and `=`. Be sure to properly escape the value when submitting request for the next page.
+
 #### Paging example
 
 Iinitial query url is:
