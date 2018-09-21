@@ -46,4 +46,4 @@ string | Enum representing supported transaction types | "Payment", "Refund", "F
 
 JSON type | Description | Examples
 ----------- | --------- | -------
-string | Unique page identifier when there are multiple pages of results | "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+string | Unique page identifier when there are multiple pages of results. Can contain any base64 characters, including `/`, `+` and `=`. | "CiAKGjBpNDd2Nmp2Zml2cXRwY+jBpOXA=="
