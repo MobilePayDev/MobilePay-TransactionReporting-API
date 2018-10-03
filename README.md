@@ -209,7 +209,7 @@ pageToken | [Page token](docs/api/types.md#page-token) | No | Specifies which re
       "ReceiverAccount" : "DK123456789",
       "Transactions": [
           {
-              "Type": "<Payment|Refund|Fee|SentBackTransfer|Payout>",
+              "Type": "<Payment|Refund|TransactionFee|ServiceFee|ReturnedTransaction|Payout|Adjustment|Chargeback>",
               "Amount": 81.00,
               "CurrencyCode": "EUR",
               "CustomBulkId" : null,
@@ -234,7 +234,7 @@ TransferReference | [Transfer reference](docs/api/types.md#transfer-reference) |
 TransferReferenceDate | [Date](docs/api/types.md#date) | Yes | Date used for aggregated transfer reference. Might be different from the date when transfer actually was made.
 ReceiverAccount | string | Yes | Account number where funds have been transferred to. IBAN or regular account number.
 Transactions | json array | Yes | A collection of transactions (see below for details)
-Type | [Transaction type](docs/api/types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, Fee, SentBackTransfer, Payout
+Type | [Transaction type](docs/api/types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, TransactionFee, ServiceFee, ReturnedTransaction, Payout, Adjustment, Chargeback
 Amount | [Amount](docs/api/types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
 CurrencyCode | [Currency](docs/api/types.md#currency) | Yes | Transaction currency.
 CustomBulkId | string | No | Pass through reference provided by merchant for the transaction.
@@ -323,7 +323,7 @@ PaymentPointId | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a 
 PaymentPointName | string | Yes | The registered name of a payment point.
 ReceiverAccount | string | Yes | Account number where funds have been transferred to. IBAN or regular account number.
 Transactions | json array | Yes | A collection of transactions (see below for details)
-Type | [Transaction type](docs/api/types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, Fee, Transfer, SentBackTransfer, Payout
+Type | [Transaction type](docs/api/types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, TransactionFee, ServiceFee, Transfer, ReturnedTransaction, Payout, Adjustment, Chargeback
 Amount | [Amount](docs/api/types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
 CurrencyCode | [Currency](docs/api/types.md#currency) | Yes | Transaction currency.
 CustomBulkId | string | No | Pass through reference provided by merchant for the transaction.
