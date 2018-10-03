@@ -40,7 +40,15 @@ string | Bank transfer reference number. For transfers made in Finland correspon
 
 JSON | Description | Examples
 ----------- | --------- | -------
-string | Enum representing supported transaction types | "Payment", "Refund", "Fee", "Transfer", "SentBackTransfer", "Payout"
+string | Enum representing supported transaction types | Payment - Incoming payment from a private customer. Includes all typs of payment sources (account, card, emoney).
+||| Refund - Refund of payment or partial payment.
+||| TransactionFee - Fee based on a transaction.
+||| ServiceFee - Fee based on other services provided by MobilePay (onboarding fee, recurring charges etc.).
+||| Transfer - Transfer of money from Merchant wallet to Merchant account.
+||| ReturnedTransaction - Failed (sent back) transfers, refunds and payouts.
+||| Payout - Payout to a customer without prior payment.
+||| Adjustment - Manual corrections affecting wallet balance.
+||| Chargeback - Reversal of a prior outbound transaction because of dispute.
 
 ### Page token
 
