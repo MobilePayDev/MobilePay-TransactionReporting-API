@@ -209,7 +209,7 @@ pageToken | [Page token](docs/api/types.md#page-token) | No | Specifies which re
       "ReceiverAccount" : "DK123456789",
       "Transactions": [
           {
-              "Type": "<Payment|Refund|TransactionFee|ServiceFee|ReturnedTransaction|Payout|Adjustment|Chargeback>",
+              "Type": "Payment",
               "Amount": 81.00,
               "CurrencyCode": "EUR",
               "CustomBulkId" : null,
