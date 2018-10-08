@@ -343,7 +343,7 @@ NextPageToken | [Page token](docs/api/types.md#page-token) | No | A token used t
    * 404 when payment point does not exist
 
 ### Sandbox example
-`transaction-reporting/api/merchant/v1/paymentpoints/{paymentPointID}/transactions?from={fromTimestamp}&to={toTimestamp}`
+`/transaction-reporting/api/merchant/v1/paymentpoints/{paymentPointID}/transactions?from={fromTimestamp}&to={toTimestamp}`
   ```
 $ curl 
   --header "Authorization: Bearer abcd1234567890" 
