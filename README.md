@@ -180,7 +180,7 @@ When a payment point transfer has been completed, you can retrieve a list of tra
 
 ### URL
 
- `/transaction-reporting/api/merchant/v1/paymentpoints/{paymentPointID}/transfer/{transferReference}?pageToken={pageToken}`
+ `/transaction-reporting/api/merchant/v1/paymentpoints/{paymentPointID}/transfers/{transferReference}?pageToken={pageToken}`
   
   
 ### Method
@@ -260,7 +260,7 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890' 
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Content-Type: application/json'
-  --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transfer/00020180624123456789?pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
+  --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transfers/00020180624123456789?pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```   
 
 ## Transactions Endpoint
