@@ -66,8 +66,8 @@ When data pagination is used `NextPageToken` property is returned inside of requ
 
 #### Paging example
 
-Iinitial query url is:
-`https://api.sandbox.mobilepay.dk/payment-transactionreporting-restapi/api/v1/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z`
+Initial query url is:
+`https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z`
 
 Returned response is:   
    ```
@@ -96,7 +96,7 @@ Returned response is:
   }
    ```
 In order to retrieve the next page, you shuould call:
-`https://api.sandbox.mobilepay.dk/payment-transactionreporting-restapi/api/v1/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA`
+`https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA`
 
 ### Error codes
 
@@ -117,7 +117,7 @@ Returns a list of completed transfer references for a payment point.
 
 ### URL
 
-  `/payment-transactionreporting-restapi/api/v1/{paymentPointID}/transfer-references?from={fromDate}&to={toDate}`
+  `/transaction-reporting/api/merchant/v1/paymentpoints/{paymentPointID}/transfer-references?from={fromDate}&to={toDate}`
   
 ### Method
 
@@ -127,7 +127,7 @@ Returns a list of completed transfer references for a payment point.
 
 Name | Type | Required | Detail
 ----- |:-----:|:-----:| -----
-paymentPointID | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a payment point (not to confuse with payment point alias which is a digit)
+paymentPointID | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a payment point. 
 fromDate | [Date](docs/api/types.md#date) | Yes | Date to filter transfer reference results from (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
 toDate | [Date](docs/api/types.md#date) | Yes | Date to filter transfer reference results to (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
   
@@ -171,7 +171,7 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890' 
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Content-Type: application/json'
-  --url https://api.sandbox.mobilepay.dk/payment-transactionreporting-restapi/api/v1/37b8450b-579b-489d-8698-c7800c65934c/transfer-references?from=2018-09-18&to=2018-09-23
+  --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transfer-references?from=2018-09-18&to=2018-09-23
   ```
    
 ## Transferred Transactions Endpoint
@@ -180,7 +180,7 @@ When a payment point transfer has been completed, you can retrieve a list of tra
 
 ### URL
 
- `/payment-transactionreporting-restapi/api/v1/{paymentPointID}/transfer/{transferReference}?pageToken={pageToken}`
+ `/transaction-reporting/api/merchant/v1/paymentpoints/{paymentPointID}/transfer/{transferReference}?pageToken={pageToken}`
   
   
 ### Method
@@ -191,7 +191,7 @@ When a payment point transfer has been completed, you can retrieve a list of tra
 
 Name | Type | Required | Detail
 ----- |:-----:|:-----:| -----
-paymentPointID | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a payment point (not to confuse with payment point alias which is a digit).
+paymentPointID | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a payment point.
 transferReference | [Transfer reference](docs/api/types.md#transfer-reference) | Yes | Bank reference number used for aggregated transfer to receiver account.
 pageToken | [Page token](docs/api/types.md#page-token) | No | Specifies which result data page to retrieve if there are more than one page
   
@@ -260,7 +260,7 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890' 
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Content-Type: application/json'
-  --url https://api.sandbox.mobilepay.dk/payment-transactionreporting-restapi/api/v1/37b8450b-579b-489d-8698-c7800c65934c/transfer/00020180624123456789?pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
+  --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transfer/00020180624123456789?pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```   
 
 ## Transactions Endpoint
@@ -271,7 +271,7 @@ Returns a list of all transactions that took place during specified time period 
 
 ### URL
 
-  `/payment-transactionreporting-restapi/api/v1/{paymentPointID}/transactions?from={fromTimestamp}&to={toTimestamp}&pageToken={pageToken}`
+  `/transaction-reporting/api/merchant/v1/paymentpoints/{paymentPointID}/transactions?from={fromTimestamp}&to={toTimestamp}&pageToken={pageToken}`
   
 ### Method
 
@@ -281,7 +281,7 @@ Returns a list of all transactions that took place during specified time period 
 
 Name | Type | Required | Detail
 ----- |:-----:|:-----:| -----
-paymentPointID | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a payment point (not to confuse with payment point alias which is a digit)
+paymentPointID | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a payment point.
 fromTimestamp | [Timestamp](docs/api/types.md#timestamp) | Yes | Timestamp to filter transactions from (inclusive). Refers to transaction timestamp.
 toTimestamp | [Timestamp](docs/api/types.md#timestamp) | Yes |Timestamp to filter transactions to (inclusive). Refers to transaction timestamp.
 pageToken | [Page token](docs/api/types.md#page-token) | No | Specifies which result data page to retrieve if there are more than one page
@@ -343,12 +343,12 @@ NextPageToken | [Page token](docs/api/types.md#page-token) | No | A token used t
    * 404 when payment point does not exist
 
 ### Sandbox example
-`/payment-transactionreporting-restapi/api/v1/{paymentPointID}/transactions?from={fromTimestamp}&to={toTimestamp}`
+`transaction-reporting/api/merchant/v1/paymentpoints/{paymentPointID}/transactions?from={fromTimestamp}&to={toTimestamp}`
   ```
 $ curl 
   --header "Authorization: Bearer abcd1234567890" 
   --header 'x-ibm-client-id: abcd1234567890' 
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Content-Type: application/json'
-  --url https://api.sandbox.mobilepay.dk/payment-transactionreporting-restapi/api/v1/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
+  --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```   
