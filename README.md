@@ -1,16 +1,24 @@
 ## Overview
-MobilePay Transaction Reporting allows to query all activities taking place at any of your MobilePay payment locations.
+MobilePay Reconciliation API allows to query all activities taking place at any of your MobilePay payment locations.
 
 This document explains how to make a technical integration to the MobilePay Transaction Reporting product. The intended audience is technical integrators from merchant itself, or from Partner Banks.
 
+Please note: Our reconciliation API is not available in the sandbox environment.
+
+
+
 ### Merchant onboarding
-You enroll to the Transaction Reporting via www.MobilePay.dk or the MobilePay Business Administration portal. Then you get access to the MobilePay Sandbox environment, where you can test the technical integration. The environment is located on [The Developer Portal](https://sandbox-developer.mobilepay.dk/) 
+As an integrator, you automatically have access to the API. As a merchant, you get access to the MobilePay Production environment, where you can test the technical integration. 
+
+The Reconciliation API consists of GET calls, which is why it not available in the sandbox environment.
+
+The environment is located on [The Developer Portal](https://developer.mobilepay.dk/) 
 
 In order to call our APIs from your systems you might need to whitelist our endpoints:
 
-| Service        | Sandbox           | Production  |
-| ------------- |:-------------:|:-----:|
-| API Gateway | https://api.sandbox.mobilepay.dk | https://api.mobilepay.dk |
+| Service        | Production  |
+| ------------- |:-----:|
+| API Gateway  | https://api.mobilepay.dk |
 
 ## Authentication
 ### OpenID Connect
