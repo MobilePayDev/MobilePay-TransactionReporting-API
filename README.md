@@ -94,13 +94,13 @@ Returned response is:
               "Type": "Payment",
               "Amount": 81.00,
               "CurrencyCode": "EUR",
-              "CustomBulkId" : null,
               "Timestamp": "2018-06-13T04:44:06Z",
               "PaymentTransactionId" : "AABBCCDD11223344",
               "TransferReference" : "00020180624123456789",
               "TransferReferenceDate" : "2018-06-24",
               "SenderComment" : "This is fun",
-              "CustomPaymentId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1"
+              "ExternalTransactionId": "QWERTY123456798",
+              "ExternalBulkId": "ASDFG987654321",
           },
           ...
       ],
@@ -224,11 +224,11 @@ pageToken | [Page token](docs/api/types.md#page-token) | No | Specifies which re
               "Type": "Payment",
               "Amount": 81.00,
               "CurrencyCode": "EUR",
-              "CustomBulkId" : null,
               "Timestamp": "2018-06-13T04:44:06Z",
               "PaymentTransactionId" : "AABBCCDD11223344",
               "SenderComment" : "This is fun",
-              "CustomPaymentId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1"
+              "ExternalTransactionId": "QWERTY123456798",
+              "ExternalBulkId": "ASDFG987654321",
           },
           ...
       ],
@@ -249,11 +249,11 @@ Transactions | json array | Yes | A collection of transactions (see below for de
 Type | [Transaction type](docs/api/types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, TransactionFee, ServiceFee, ReturnedTransaction, Payout, Adjustment, Chargeback
 Amount | [Amount](docs/api/types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
 CurrencyCode | [Currency](docs/api/types.md#currency) | Yes | Transaction currency.
-CustomBulkId | string | No | Pass through reference provided by merchant for the transaction.
 Timestamp | [Timestamp](docs/api/types.md#timestamp) | Yes | Timestamp when transaction has been completed.
-PaymentTransactionId | string | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.  
+PaymentTransactionId | string | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.
 SenderComment | string | No | Free-form text message provided by payment sender.
-CustomPaymentId | string | No | Custom payment id provided by merchant / payment integrator.
+ExternalTransactionId | string | No | ExternalTransactionId is ID that could be provided by merchant / payment integrator when initiating payments. In general, it can be used for correlating transactions between MobilePay and external (merchant/integrator) system.
+ExternalBulkId | string | No | Similar purpose as ExternalTransactionId but used for correlating transactions with bulk/group id from external (merchant/integrator) system.
 NextPageToken | [Page token](docs/api/types.md#page-token) | No | A token used to retrieve next page of results. Null if this is the last page.
     
 ### Error Response
@@ -313,13 +313,13 @@ pageToken | [Page token](docs/api/types.md#page-token) | No | Specifies which re
               "Type": "Payment",
               "Amount": 81.00,
               "CurrencyCode": "EUR",
-              "CustomBulkId" : null,
               "Timestamp": "2018-06-13T04:44:06Z",
               "PaymentTransactionId" : "AABBCCDD11223344",
               "TransferReference" : "00020180624123456789",
               "TransferReferenceDate" : "2018-06-24",
               "SenderComment" : "This is fun",
-              "CustomPaymentId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1"
+              "ExternalTransactionId": "QWERTY123456798",
+              "ExternalBulkId": "ASDFG987654321",
           },
           ...
       ],
@@ -338,13 +338,13 @@ Transactions | json array | Yes | A collection of transactions (see below for de
 Type | [Transaction type](docs/api/types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, TransactionFee, ServiceFee, Transfer, ReturnedTransaction, Payout, Adjustment, Chargeback
 Amount | [Amount](docs/api/types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
 CurrencyCode | [Currency](docs/api/types.md#currency) | Yes | Transaction currency.
-CustomBulkId | string | No | Pass through reference provided by merchant for the transaction.
 Timestamp | [Timestamp](docs/api/types.md#timestamp) | Yes | Timestamp when transaction has been completed. Corresponds to url parameters "fromDateTimeOffset" and "toDateTimeOffset".
 PaymentTransactionId | string | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.
 TransferReference | [Transfer reference](docs/api/types.md#transfer-reference) | No | Bank reference number used for aggregated transfer to receiver account. Null if this transaction has not been transferred yet.
 TransferReferenceDate | [Date](docs/api/types.md#date) | No | Date used for aggregated transfer reference. Null if this transaction has not been transferred yet.
 SenderComment | string | No | Free-form text message provided by payment sender.
-CustomPaymentId | string | No | Custom payment id provided by merchant / payment integrator.
+ExternalTransactionId | string | No | ExternalTransactionId is ID that could be provided by merchant / payment integrator when initiating payments. In general, it can be used for correlating transactions between MobilePay and external (merchant/integrator) system.
+ExternalBulkId | string | No | Similar purpose as ExternalTransactionId but used for correlating transactions with bulk/group id from external (merchant/integrator) system.
 NextPageToken | [Page token](docs/api/types.md#page-token) | No | A token used to retrieve next page of results. Null if this is the last page.
     
 ### Error Response
