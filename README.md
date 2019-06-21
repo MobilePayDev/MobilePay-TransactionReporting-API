@@ -30,7 +30,7 @@ When the merchant is onboarded, he has a user in MobilePay that is able to manag
 
 Client: In order for this to work, the merchant must grant consent to an application(Client) with these capabilities. The client is the application that is attempting to get access to the user’s account. The client needs to get consent from the user before it can do so. This consent is granted through mechanism in the [OpenID Connect](http://openid.net/connect/) protocol suite.
 
-Integrators are the same as Clients in the OAuth 2.0 protocol. The first thing that must be done as a Client is to go and [register here](https://www.mobilepay.dk/da-dk/Erhverv/Pages/MobilePay-integrator.aspx). Once this is done the Client must initiate the [hybrid flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth) specified in OpenID connect. For Transaction Reporting product the Client must request consent from the merchant using the `transaction_reporting` scope. Scopes are like permissions or delegated rights that the Resource Owner wishes the client to be able to do on their behalf. You also need to specify `offline_access` scope, in order to get the refresh token. The authorization server in sandbox is [located here](https://api.sandbox.mobilepay.dk/merchant-authentication-openidconnect).
+Integrators are the same as Clients in the OAuth 2.0 protocol. Client must initiate the [hybrid flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth) specified in OpenID connect. For Transaction Reporting product the Client must request consent from the merchant using the `transaction_reporting` scope. You also need to specify `offline_access` scope, in order to get the refresh token. The authorization server in sandbox is [located here](https://api.sandbox.mobilepay.dk/merchant-authentication-openidconnect).
 
 If the merchant grants consent, an authorization code is returned which the Client must exchange for an id token, an access token and a refresh token. The refresh token is used to refresh ended sessions without asking for merchant consent again. This means that if the Client receives an answer from the api gateway saying that the access token is invalid, the refresh token is exchanged for a new access token and refresh token. 
 
@@ -41,7 +41,6 @@ Find the supported endpoints in the links below
 
 | Environment   | Link |
 | ------------- | ------------- |
-| Sandbox | https://api.sandbox.mobilepay.dk/merchant-authentication-openidconnect/.well-known/openid-configuration |
 | Production | https://api.mobilepay.dk/merchant-authentication-openidconnect/.well-known/openid-configuration |
 
 In order to authenticate to the API, all requests to the API must contain at least three authentication headers:
