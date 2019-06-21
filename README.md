@@ -1,4 +1,4 @@
-## Overview (still in closed beta)
+## Overview (invite only)
 
 *Purpose:* The main objective is to make it easier for you to do reconciliation on your side. We at MobilePay will provide details of transactions to help you with that, with the products that MobilePay offers. This will be done by summarizing payment, fees and refunds etc. These are summarized in further details below. 
 
