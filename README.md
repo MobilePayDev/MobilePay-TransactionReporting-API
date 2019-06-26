@@ -63,9 +63,9 @@ When submitting requests, `Content-Type: application/json` HTTP header must be p
 
 `$ curl --request GET --header 'Content-Type: application/json' --url https://<mobile-pay-root>/resource`
 
-## Payment point
+## PpaymentPointId
 
-When using the Transaction Reporting API, you will be introduced to the term 'payment point'. As MobilePay has different API product, and each product has a payment point. The payment point is named differently across products.  
+When using the Transaction Reporting API, you will be introduced to the term 'paymentPointId'. paymentPointId - GUID assigned to payment pointAs MobilePay has different API product, and each product has a payment point. The payment point is named differently across products.  
 
 * Subscriptions API  : `SubscriptionProviderId`
 
