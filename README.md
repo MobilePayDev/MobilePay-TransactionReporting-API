@@ -39,7 +39,7 @@ An example of how to use OpenID connect in C# [can be found here](https://github
 ### Supported Endpoints
 Find the supported endpoints in the links below
 
-| Environment   | Link |
+| Environment   | OpenID Connect Discovery |
 | ------------- | ------------- |
 | Production | https://api.mobilepay.dk/merchant-authentication-openidconnect/.well-known/openid-configuration |
 
