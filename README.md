@@ -26,11 +26,11 @@ In order to call our APIs from your systems you might need to whitelist our endp
 
 ## Authentication
 ### OpenID Connect
-When the merchant is onboarded, he has a user in MobilePay that is able to manage which products the merchant wishes to use. Not all merchants have the technical capabilities to make integrations to MobilePay, instead they may need to go through applications with these capabilities. The OpenID Connect protocol is a simple identity layer on top of the OAuth 2.0 protocol.
+When the merchant is onboarded, he has a user in MobilePay that is able to manage which products the merchant wishes to use. The OpenID Connect protocol is a simple identity layer on top of the OAuth 2.0 protocol.
 
-Client: In order for this to work, the merchant must grant consent to an application(Client) with these capabilities. The client is the application that is attempting to get access to the user’s account. The client needs to get consent from the user before it can do so. This consent is granted through mechanism in the [OpenID Connect](http://openid.net/connect/) protocol suite.
+Client: In order for this to work, the merchant must grant consent to an application(Client). The client is the application that is attempting to get access to the user’s account. This consent is granted through mechanism in the [OpenID Connect](http://openid.net/connect/) protocol suite.
 
-Integrators are the same as Clients in the OAuth 2.0 protocol. Client must initiate the [hybrid flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth) specified in OpenID connect. For Transaction Reporting product the Client must request consent from the merchant using the `transactionreporting` scope. You also need to specify `offline_access` scope, in order to get the refresh token. The authorization server in sandbox is [located here](https://api.mobilepay.dk/merchant-authentication-openidconnect).
+lient must initiate the [hybrid flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth) specified in OpenID connect. For Transaction Reporting product the Client must request consent from the merchant using the `transactionreporting` scope. You also need to specify `offline_access` scope, in order to get the refresh token. The authorization server in sandbox is [located here](https://api.mobilepay.dk/merchant-authentication-openidconnect).
 
 If the merchant grants consent, an authorization code is returned which the Client must exchange for an id token, an access token and a refresh token. The refresh token is used to refresh ended sessions without asking for merchant consent again. This means that if the Client receives an answer from the api gateway saying that the access token is invalid, the refresh token is exchanged for a new access token and refresh token. 
 
