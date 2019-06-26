@@ -63,6 +63,15 @@ When submitting requests, `Content-Type: application/json` HTTP header must be p
 
 `$ curl --request GET --header 'Content-Type: application/json' --url https://<mobile-pay-root>/resource`
 
+## Payment point
+
+When using the Transaction Reporting API, you will be introduced to the term 'payment point'. As MobilePay has different API product, and each product has a payment point. The payment point is named differently across products.  
+
+* Subscriptions API  : `SubscriptionProviderId`
+
+* Invoice API : `Invoice Issuer ID` 
+ 
+ 
 ### Result paging
 
 Some endpoint queries can return a large number of results. In order to deliver them efficiently over the network, data pagination is used. Query responses which have more than **1000 transactions** are automatically split into pages of 1000 records each.
