@@ -67,12 +67,20 @@ When submitting requests, `Content-Type: application/json` HTTP header must be p
 
 When using the Transaction Reporting API, you will be introduced to the term 'paymentPointId'. paymentPointId - GUID assigned to payment pointAs MobilePay has different API product, and each product has a payment point. The payment point is named differently across products.  
 
-* Subscriptions API  : `SubscriptionProviderId`
+Subscriptions API  
 
-* Invoice API : `Invoice Issuer ID` 
- 
- 
- 
+* PaymentPointId = `SubscriptionProviderId`
+
+* The individual transactions will contain the same `reference/ID`, that you have assigned, and that `reference/ID` will be returned through the API.  `external_id` is the identifier of a specific payment in merchant's system, and can be used for this purpose. 
+
+
+Invoice API
+
+ * PaymentPointId = `Invoice Issuer ID` 
+
+*  If you fill out the field `PaymentReference`, then the ID follows, that you’ve written as a  `PaymentReference`, for the payment. If you do not fill out  `PaymentReference`, then it would be the input from the field  `InvoiceNumber`,  that will be the reference on the payment.
+
+
 ### Result paging
 
 Some endpoint queries can return a large number of results. In order to deliver them efficiently over the network, data pagination is used. Query responses which have more than **1000 transactions** are automatically split into pages of 1000 records each.
