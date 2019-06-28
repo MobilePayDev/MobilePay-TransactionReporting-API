@@ -63,7 +63,7 @@ When submitting requests, `Content-Type: application/json` HTTP header must be p
 
 `$ curl --request GET --header 'Content-Type: application/json' --url https://<mobile-pay-root>/resource`
 
-## PaymentPointId
+## PaymentPointId 
 
 When using the Transaction Reporting API, you will be introduced to the term 'paymentPointId'. paymentPointId - GUID assigned to payment pointAs MobilePay has different API product, and each product has a payment point. The payment point is named differently across products.  
 
@@ -71,7 +71,7 @@ Subscriptions API
 
 * PaymentPointId = `SubscriptionProviderId`
 
-* The individual transactions will contain the same `reference/ID`, that you have assigned, and that `reference/ID` will be returned through the API.  `external_id` is the identifier of a specific payment in merchant's system, and can be used for this purpose. 
+* The individual transactions will contain the same `external_id`, that you have assigned, and that `external_id` will be returned through the API.  `external_id` is the identifier of a specific payment in merchant's system, and can be used for this purpose. 
 
 
 Invoice API
