@@ -71,7 +71,7 @@ Subscriptions API
 
 * PaymentPointId = `SubscriptionProviderId`
  
-* The individual transactions will contain the same `external_id`, that you have assigned, and that `external_id` will be returned through the API.  `external_id` is the identifier of a specific payment in merchant's system, and can be used for this purpose. 
+* The individual transactions will contain the same `external_id`, that you have assigned, and that `external_id` will be returned through the API.  `external_id` is the identifier of a specific payment in merchant's system, and can be used for this purpose. You generate this ID. 
 
 
 Invoice API
