@@ -70,7 +70,7 @@ When using the Transaction Reporting API, you will be introduced to the term 'pa
 Subscriptions API  
 
 * PaymentPointId = `SubscriptionProviderId`
-
+ 
 * The individual transactions will contain the same `external_id`, that you have assigned, and that `external_id` will be returned through the API.  `external_id` is the identifier of a specific payment in merchant's system, and can be used for this purpose. 
 
 
