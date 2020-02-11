@@ -165,12 +165,12 @@ toDate | [Date](docs/api/types.md#date) | Yes | Date to filter transfer referenc
    HTTP 200
   ```javascript
   {
-      "TransferReferences": [
+      "transferReferences": [
           {
-              "TransferReference": "00020180624123456789",
-              "TransferReferenceDate" : "2018-06-24",
-              "TotalTransferredAmount": 195.00,
-              "CurrencyCode": "DKK"
+              "transferReference": "00020180624123456789",
+              "transferReferenceDate" : "2018-06-24",
+              "totalTransferredAmount": 195.00,
+              "currencyCode": "DKK"
           },
           ...
       ]
@@ -179,11 +179,11 @@ toDate | [Date](docs/api/types.md#date) | Yes | Date to filter transfer referenc
 
 Name | Type | Required | Detail
 ----- |:-----:|:-----:| -----
-TransferReferences | json array | Yes | A collection of transfer reference lines (details below)
-TransferReference | [Transfer reference](docs/api/types.md#transfer-reference) | Yes | Bank transfer reference number. Exact format can vary according to country's banking infrastructure regulations. The reference is considered unique for a duration of 1 year.
-TransferReferenceDate | [Date](docs/api/types.md#date) | Yes | Transfer reference date. Corresponds to URL filter parameters "dateFrom" and "dateTo".
-TotalTransferredAmount | [Amount](docs/api/types.md#amount) | Yes | Transferred amount.
-CurrencyCode | [Currency](docs/api/types.md#currency) | Yes | Transfer currency.
+transferReferences | json array | Yes | A collection of transfer reference lines (details below)
+transferReference | [Transfer reference](docs/api/types.md#transfer-reference) | Yes | Bank transfer reference number. Exact format can vary according to country's banking infrastructure regulations. The reference is considered unique for a duration of 1 year.
+transferReferenceDate | [Date](docs/api/types.md#date) | Yes | Transfer reference date. Corresponds to URL filter parameters "dateFrom" and "dateTo".
+totalTransferredAmount | [Amount](docs/api/types.md#amount) | Yes | Transferred amount.
+currencyCode | [Currency](docs/api/types.md#currency) | Yes | Transfer currency.
     
 ### Error Response
 
@@ -229,49 +229,49 @@ pageToken | [Page token](docs/api/types.md#page-token) | No | Specifies which re
    HTTP 200
    ```javascript
   {
-      "MerchantId": "123456789",
-      "MerchantName": "Acme Ltd",
-      "PaymentPointId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1",
-      "PaymentPointName" : "snack kiosk",
-      "TransferReference" : "00020180624123456789",
-      "TransferReferenceDate" : "2018-06-24",
-      "ReceiverAccount" : "DK123456789",
-      "Transactions": [
+      "merchantId": "123456789",
+      "merchantName": "Acme Ltd",
+      "paymentPointId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1",
+      "paymentPointName" : "snack kiosk",
+      "transferReference" : "00020180624123456789",
+      "transferReferenceDate" : "2018-06-24",
+      "receiverAccount" : "DK123456789",
+      "transactions": [
           {
-              "Type": "Payment",
-              "Amount": 81.00,
-              "CurrencyCode": "EUR",
-              "Timestamp": "2018-06-13T04:44:06Z",
-              "PaymentTransactionId" : "AABBCCDD11223344",
-              "SenderComment" : "This is fun",
-              "ExternalTransactionId": "QWERTY123456798",
-              "ExternalBulkId": "ASDFG987654321",
+              "type": "Payment",
+              "amount": 81.00,
+              "currencyCode": "EUR",
+              "timestamp": "2018-06-13T04:44:06Z",
+              "paymentTransactionId" : "AABBCCDD11223344",
+              "senderComment" : "This is fun",
+              "externalTransactionId": "QWERTY123456798",
+              "externalBulkId": "ASDFG987654321",
           },
           ...
       ],
-      "NextPageToken": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+      "nextPageToken": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
   }
    ```
 
 Name | Type | Required | Detail
 ----- |:-----:|:-----:| -----
-MerchantId | string | Yes | Public merchant identifier (usually VAT or CVR code)
-MerchantName | string | Yes | Merchant legal name (as registered with MobilePay)
-PaymentPointId | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a payment point. Corresponds to the provided url parameter.
-PaymentPointName | string | Yes | The registered name of a payment point.
-TransferReference | [Transfer reference](docs/api/types.md#transfer-reference) | Yes | Bank reference number used for aggregated transfer to receiver account. Corresponds to url parameter.
-TransferReferenceDate | [Date](docs/api/types.md#date) | Yes | Date used for aggregated transfer reference. Might be different from the date when transfer actually was made.
-ReceiverAccount | string | Yes | Account number where funds have been transferred to. IBAN or regular account number.
-Transactions | json array | Yes | A collection of transactions (see below for details)
-Type | [Transaction type](docs/api/types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, TransactionFee, ServiceFee, ReturnedTransaction, Payout, Adjustment, Chargeback
-Amount | [Amount](docs/api/types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
-CurrencyCode | [Currency](docs/api/types.md#currency) | Yes | Transaction currency.
-Timestamp | [Timestamp](docs/api/types.md#timestamp) | Yes | Timestamp when transaction has been completed.
-PaymentTransactionId | string | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.
-SenderComment | string | No | Free-form text message provided by payment sender.
-ExternalTransactionId | string | No | ExternalTransactionId is ID that could be provided by merchant / payment integrator when initiating payments. In general, it can be used for correlating transactions between MobilePay and external (merchant/integrator) system.
-ExternalBulkId | string | No | Similar purpose as ExternalTransactionId but used for correlating transactions with bulk/group id from external (merchant/integrator) system.
-NextPageToken | [Page token](docs/api/types.md#page-token) | No | A token used to retrieve next page of results. Null if this is the last page.
+merchantId | string | Yes | Public merchant identifier (usually VAT or CVR code)
+merchantName | string | Yes | Merchant legal name (as registered with MobilePay)
+paymentPointId | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a payment point. Corresponds to the provided url parameter.
+paymentPointName | string | Yes | The registered name of a payment point.
+transferReference | [Transfer reference](docs/api/types.md#transfer-reference) | Yes | Bank reference number used for aggregated transfer to receiver account. Corresponds to url parameter.
+transferReferenceDate | [Date](docs/api/types.md#date) | Yes | Date used for aggregated transfer reference. Might be different from the date when transfer actually was made.
+receiverAccount | string | Yes | Account number where funds have been transferred to. IBAN or regular account number.
+transactions | json array | Yes | A collection of transactions (see below for details)
+type | [Transaction type](docs/api/types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, TransactionFee, ServiceFee, ReturnedTransaction, Payout, Adjustment, Chargeback
+amount | [Amount](docs/api/types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
+currencyCode | [Currency](docs/api/types.md#currency) | Yes | Transaction currency.
+timestamp | [Timestamp](docs/api/types.md#timestamp) | Yes | Timestamp when transaction has been completed.
+paymentTransactionId | string | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.
+senderComment | string | No | Free-form text message provided by payment sender.
+externalTransactionId | string | No | ExternalTransactionId is ID that could be provided by merchant / payment integrator when initiating payments. In general, it can be used for correlating transactions between MobilePay and external (merchant/integrator) system.
+externalBulkId | string | No | Similar purpose as ExternalTransactionId but used for correlating transactions with bulk/group id from external (merchant/integrator) system.
+nextPageToken | [Page token](docs/api/types.md#page-token) | No | A token used to retrieve next page of results. Null if this is the last page.
     
 ### Error Response
 
@@ -320,49 +320,49 @@ pageToken | [Page token](docs/api/types.md#page-token) | No | Specifies which re
    HTTP 200
    ```javascript
   {
-      "MerchantId": "123456789",
-      "MerchantName": "Acme Ltd",
-      "PaymentPointId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1",
-      "PaymentPointName" : "snack kiosk",
-      "ReceiverAccount" : "DK123456789",
-      "Transactions": [
+      "merchantId": "123456789",
+      "merchantName": "Acme Ltd",
+      "paymentPointId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1",
+      "paymentPointName" : "snack kiosk",
+      "receiverAccount" : "DK123456789",
+      "transactions": [
           {
-              "Type": "Payment",
-              "Amount": 81.00,
-              "CurrencyCode": "EUR",
-              "Timestamp": "2018-06-13T04:44:06Z",
-              "PaymentTransactionId" : "AABBCCDD11223344",
-              "TransferReference" : "00020180624123456789",
-              "TransferReferenceDate" : "2018-06-24",
-              "SenderComment" : "This is fun",
-              "ExternalTransactionId": "QWERTY123456798",
-              "ExternalBulkId": "ASDFG987654321",
+              "type": "Payment",
+              "amount": 81.00,
+              "currencyCode": "EUR",
+              "timestamp": "2018-06-13T04:44:06Z",
+              "paymentTransactionId" : "AABBCCDD11223344",
+              "transferReference" : "00020180624123456789",
+              "transferReferenceDate" : "2018-06-24",
+              "senderComment" : "This is fun",
+              "externalTransactionId": "QWERTY123456798",
+              "externalBulkId": "ASDFG987654321",
           },
           ...
       ],
-      "NextPageToken": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+      "nextPageToken": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
   }
    ```
 
 Name | Type | Required | Detail
 ----- |:-----:|:-----:| -----
-MerchantId | string | Yes | Public merchant identifier (usually VAT or CVR code)
-MerchantName | string | Yes | Merchant legal name (as registered with MobilePay)
-PaymentPointId | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a payment point. Corresponds to the provided url parameter.
-PaymentPointName | string | Yes | The registered name of a payment point.
-ReceiverAccount | string | Yes | Account number where funds have been transferred to. IBAN or regular account number.
-Transactions | json array | Yes | A collection of transactions (see below for details)
-Type | [Transaction type](docs/api/types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, TransactionFee, ServiceFee, Transfer, ReturnedTransaction, Payout, Adjustment, Chargeback
-Amount | [Amount](docs/api/types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
-CurrencyCode | [Currency](docs/api/types.md#currency) | Yes | Transaction currency.
-Timestamp | [Timestamp](docs/api/types.md#timestamp) | Yes | Timestamp when transaction has been completed. Corresponds to url parameters "fromDateTimeOffset" and "toDateTimeOffset".
-PaymentTransactionId | string | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.
-TransferReference | [Transfer reference](docs/api/types.md#transfer-reference) | No | Bank reference number used for aggregated transfer to receiver account. Null if this transaction has not been transferred yet.
-TransferReferenceDate | [Date](docs/api/types.md#date) | No | Date used for aggregated transfer reference. Null if this transaction has not been transferred yet.
-SenderComment | string | No | Free-form text message provided by payment sender.
-ExternalTransactionId | string | No | ExternalTransactionId is ID that could be provided by merchant / payment integrator when initiating payments. In general, it can be used for correlating transactions between MobilePay and external (merchant/integrator) system.
-ExternalBulkId | string | No | Similar purpose as ExternalTransactionId but used for correlating transactions with bulk/group id from external (merchant/integrator) system.
-NextPageToken | [Page token](docs/api/types.md#page-token) | No | A token used to retrieve next page of results. Null if this is the last page.
+merchantId | string | Yes | Public merchant identifier (usually VAT or CVR code)
+merchantName | string | Yes | Merchant legal name (as registered with MobilePay)
+paymentPointId | [Guid](docs/api/types.md#guid) | Yes | Unique identifier for a payment point. Corresponds to the provided url parameter.
+paymentPointName | string | Yes | The registered name of a payment point.
+receiverAccount | string | Yes | Account number where funds have been transferred to. IBAN or regular account number.
+transactions | json array | Yes | A collection of transactions (see below for details)
+type | [Transaction type](docs/api/types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, transactionFee, ServiceFee, Transfer, ReturnedTransaction, Payout, Adjustment, Chargeback
+amount | [Amount](docs/api/types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
+currencyCode | [Currency](docs/api/types.md#currency) | Yes | Transaction currency.
+timestamp | [Timestamp](docs/api/types.md#timestamp) | Yes | Timestamp when transaction has been completed. Corresponds to url parameters "fromDateTimeOffset" and "toDateTimeOffset".
+paymentTransactionId | string | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.
+transferReference | [Transfer reference](docs/api/types.md#transfer-reference) | No | Bank reference number used for aggregated transfer to receiver account. Null if this transaction has not been transferred yet.
+transferReferenceDate | [Date](docs/api/types.md#date) | No | Date used for aggregated transfer reference. Null if this transaction has not been transferred yet.
+senderComment | string | No | Free-form text message provided by payment sender.
+externalTransactionId | string | No | ExternalTransactionId is ID that could be provided by merchant / payment integrator when initiating payments. In general, it can be used for correlating transactions between MobilePay and external (merchant/integrator) system.
+externalBulkId | string | No | Similar purpose as ExternalTransactionId but used for correlating transactions with bulk/group id from external (merchant/integrator) system.
+nextPageToken | [Page token](docs/api/types.md#page-token) | No | A token used to retrieve next page of results. Null if this is the last page.
     
 ### Error Response
 
