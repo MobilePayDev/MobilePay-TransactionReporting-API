@@ -101,27 +101,27 @@ Initial query url is:
 Returned response is:   
    ```
   {
-      "MerchantId": "123456789",
-      "MerchantName": "Acme Ltd",
-      "PaymentPointId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1",
-      "PaymentPointName" : "snack kiosk",
-      "ReceiverAccount" : "DK123456789",
-      "Transactions": [
+      "merchantId": "123456789",
+      "merchantName": "Acme Ltd",
+      "paymentPointId" : "08b2f28f-9e5c-4416-ab5a-6338511c8ad1",
+      "paymentPointName" : "snack kiosk",
+      "receiverAccount" : "DK123456789",
+      "transactions": [
           {
-              "Type": "Payment",
-              "Amount": 81.00,
-              "CurrencyCode": "EUR",
-              "Timestamp": "2018-06-13T04:44:06Z",
-              "PaymentTransactionId" : "AABBCCDD11223344",
-              "TransferReference" : "00020180624123456789",
-              "TransferReferenceDate" : "2018-06-24",
-              "SenderComment" : "This is fun",
-              "ExternalTransactionId": "QWERTY123456798",
-              "ExternalBulkId": "ASDFG987654321",
+              "type": "Payment",
+              "amount": 81.00,
+              "currencyCode": "EUR",
+              "timestamp": "2018-06-13T04:44:06Z",
+              "paymentTransactionId" : "AABBCCDD11223344",
+              "transferReference" : "00020180624123456789",
+              "transferReferenceDate" : "2018-06-24",
+              "senderComment" : "This is fun",
+              "externalTransactionId": "QWERTY123456798",
+              "externalBulkId": "ASDFG987654321",
           },
           ...
       ],
-      "NextPageToken": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+      "nextPageToken": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
   }
    ```
 In order to retrieve the next page, you shuould call:
