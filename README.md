@@ -30,7 +30,7 @@ When the merchant is onboarded, he has a user in MobilePay that is able to manag
 
 Client: In order for this to work, the merchant must grant consent to an application(Client). The client is the application that is attempting to get access to the user’s account. This consent is granted through mechanism in the [OpenID Connect](http://openid.net/connect/) protocol suite.
 
-lient must initiate the [hybrid flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth) specified in OpenID connect. For Transaction Reporting product the Client must request consent from the merchant using the `transactionreporting` scope. You also need to specify `offline_access` scope, in order to get the refresh token. The authorization server in sandbox is [located here](https://api.mobilepay.dk/merchant-authentication-openidconnect).
+lient must initiate the [hybrid flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth) specified in OpenID connect. For Transaction Reporting product the Client must request consent from the merchant using the `transactionreporting` scope. You also need to specify `offline_access` scope, in order to get the refresh token. The authorization server in sandbox is [located here](https://api.sandbox.mobilepay.dk/merchant-authentication-openidconnect).
 
 If the merchant grants consent, an authorization code is returned which the Client must exchange for an id token, an access token and a refresh token. The refresh token is used to refresh ended sessions without asking for merchant consent again. This means that if the Client receives an answer from the api gateway saying that the access token is invalid, the refresh token is exchanged for a new access token and refresh token. 
 
@@ -137,8 +137,62 @@ In general the following error codes are possible. Error messages from the API a
  * 404 is used in the case of trying to query non existing resource. 
  * 412 is used to indicate that resource exists but is not yet ready for use (for long running reports).
  * 500 can happen if something unexpected goes wrong in the API, e.g. an unhandled exception. There is likely to be quite limited error information available in this case and it's best to contact MobilePay, providing details of what request caused the problem and when it was done. One form of 500 error that may be observed is a TimeoutException, which can ocurr when the API server did not receive an expected event after sending a command into the system to be executed. This error should be treated like other unhandled exceptions and reported, rather than ignored like a network timeout might be.
+ 
+ 
+## Payment Points Endpoint
 
-## Transfer References Endpoint
+Returns Payment Points owned by a given Merchant based on the access token acquired from Merchant Authentication.
+
+### URL
+
+  `/transaction-reporting/api/merchant/v1/paymentpoints`
+  
+### Method
+
+  `GET`
+  
+### Success Response
+
+   HTTP 200
+  ```javascript
+{
+    "merchantId": "E0225FF2-A1E6-4032-97BD-C6E90026C66B",
+    "merchantName": "John's Flowershop",
+    "paymentPoints": [
+        {
+          "paymentPointId": "55ADC672-83FB-408E-826A-1F95E732C5EC",
+          "paymentPointName": "John's Flowershop Payment Point"
+        }
+    ]
+}
+  ```
+
+Name | Type | Detail
+----- |:-----:|:-----:| -----
+merchantId | string | The id of the Merchant owning the Payment Points. 
+merchantName | string | The name of the Merchant owning the Payment Points. 
+paymentPoints | json array | Contains a list of Payment Points owned by a Merchant. 
+paymentPointId | string | Id of the Payment Point. For more information about the context of the Payment Point Id, see the section regarding the Payment Point Id. 
+paymentPointName | string | Name of the Payment Point. 
+    
+### Error Response
+
+   * 401 when required authentication headers are missing/invalid in the request
+   * 403 when the access token doesn't contain a merchant_id claim.
+   * 409 when the merchant could not be found.
+   
+### Sandbox example
+
+  ```
+$ curl 
+  --header "Authorization: Bearer abcd1234567890" 
+  --header 'x-ibm-client-id: abcd1234567890' 
+  --header 'x-ibm-client-secret: abcd1234567890'
+  --header 'Content-Type: application/json'
+  --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints
+  ```
+ 
+ ## Transfer References Endpoint
 
 Returns a list of completed transfer references for a payment point.
 
