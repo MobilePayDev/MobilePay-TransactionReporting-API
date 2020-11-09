@@ -1,4 +1,8 @@
-## Overview (invite only)
+---
+layout: default
+---
+
+# Overview (invite only)
 
 *Purpose:* The main objective is to make it easier for you to do reconciliation on your side. We at MobilePay will provide details of transactions to help you with that, with the products that MobilePay offers. This will be done by summarizing payment, fees and refunds etc. These are summarized in further details below. 
 
@@ -24,7 +28,7 @@ In order to call our APIs from your systems you might need to whitelist our endp
 | ------------- |:-----:|
 | API Gateway  | https://api.mobilepay.dk |
 
-## Authentication
+# Authentication
 ### OpenID Connect
 When the merchant is onboarded, he has a user in MobilePay that is able to manage which products the merchant wishes to use. The OpenID Connect protocol is a simple identity layer on top of the OAuth 2.0 protocol.
 
@@ -53,7 +57,7 @@ In order to authenticate to the API, all requests to the API must contain at lea
 ### Implementing OpenID Connect protocol
 Although the protocol is not that complicated, there is no need to implement it yourself! There are many OpenID Connect certified libraries for different platforms, so you just have to chose the one, that suits you best [from this list](http://openid.net/developers/certified/#RPLibs).
 
-## General notes
+# General notes
 
 MobilePay Transaction Reporting is a full-fledged HTTPS REST api using JSON as request/response communication media.
 
@@ -63,7 +67,7 @@ When submitting requests, `Content-Type: application/json` HTTP header must be p
 
 `$ curl --request GET --header 'Content-Type: application/json' --url https://<mobile-pay-root>/resource`
 
-## PaymentPointId 
+# PaymentPointId 
 
 When using the Transaction Reporting API, you will be introduced to the term 'paymentPointId'. paymentPointId - GUID assigned to payment pointAs MobilePay has different API product, and each product has a payment point. The payment point is named differently across products.  
 
@@ -99,7 +103,7 @@ Initial query url is:
 `https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z`
 
 Returned response is:   
-   ```
+   ```javascript
   {
       "merchantId": "123456789",
       "merchantName": "Acme Ltd",
@@ -139,7 +143,7 @@ In general the following error codes are possible. Error messages from the API a
  * 500 can happen if something unexpected goes wrong in the API, e.g. an unhandled exception. There is likely to be quite limited error information available in this case and it's best to contact MobilePay, providing details of what request caused the problem and when it was done. One form of 500 error that may be observed is a TimeoutException, which can ocurr when the API server did not receive an expected event after sending a command into the system to be executed. This error should be treated like other unhandled exceptions and reported, rather than ignored like a network timeout might be.
  
  
-## Payment Points Endpoint
+# Payment Points Endpoint
 
 Returns Payment Points owned by a given Merchant based on the access token acquired from Merchant Authentication.
 
@@ -192,7 +196,7 @@ $ curl
   --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints
   ```
  
- ## Transfer References Endpoint
+# Transfer References Endpoint
 
 Returns a list of completed transfer references for a payment point.
 
@@ -257,7 +261,7 @@ $ curl
   --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transfer-references?from=2018-09-18&to=2018-09-23
   ```
    
-## Transferred Transactions Endpoint
+# Transferred Transactions Endpoint
 
 When a payment point transfer has been completed, you can retrieve a list of transactions that were included in the transfer. If you do not know the transfer reference, it can be obtained from the endpoint above.
 
@@ -346,7 +350,7 @@ $ curl
   --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transfers/00020180624123456789?pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```   
 
-## Transactions Endpoint
+# Transactions Endpoint
 
 Returns a list of all transactions that took place during specified time period for a payment point.
 
