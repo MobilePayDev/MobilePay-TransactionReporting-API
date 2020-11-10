@@ -1,5 +1,31 @@
 overview_title: Overview
-overview_url: "index"
+overview_url: "index#overview"
 
 types_title: Types
 types_url: "types"
+
+release_notes_title: Release Notes
+release_notes_url: "release_notes"
+
+
+overview :
+- title: Authentication
+  url: "index#authentication"
+
+- title: General notes
+  url: "index#general_notes"
+
+- title: PaymentPointId
+  url: "index#payment_point_id"
+
+- title: Payment Points Endpoint
+  url: "index#payment_points_endpoint"
+
+- title: Transfer References Endpoint
+  url: "index#transfer_references_endpoint"
+
+- title: Transferred Transactions Endpoint
+  url: "index#transferred_transactions_endpoint"
+
+- title: Transactions Endpoint
+  url: "index#transactions_endpoint"
