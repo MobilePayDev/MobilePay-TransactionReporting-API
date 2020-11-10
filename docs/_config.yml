@@ -16,7 +16,7 @@
 title: MobilePay Transaction Reporting
 #email: your-email@example.com
 description: MobilePay Transaction Reporting API documentation.
-base_url: "https://mobilepaydev.github.io/MobilePay-TransactionReporting/" # the subpath of your site, e.g. /blog
+base_url: "https://mobilepaydev.github.io/MobilePay-TransactionReporting-API/" # the subpath of your site, e.g. /blog
 
 show_downloads: false
 # Build settings
