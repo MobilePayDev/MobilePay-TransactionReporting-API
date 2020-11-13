@@ -135,4 +135,4 @@ A `text/csv` *Content-Type* response with `;` seperated CSV file. A sample Trans
    * 403 when user is not authorized to access the resource or user account is disabled
    * 404 when payment point does not exist
    * 412 when transfer reference is being processed and will become available later
-
+   * 415 when Accept header contains unsupported media type
