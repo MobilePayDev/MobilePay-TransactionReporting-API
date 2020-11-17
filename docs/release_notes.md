@@ -126,7 +126,7 @@ nextPageToken        | [Page token](types.md#page-token)                    | No
 
 ### Success CSV Response
 
-A `text/csv` *Content-Type* response with `;` seperated CSV file. A sample Transferred Transactions file can be [downloaded from here.](assets/files/transferredtransactions/f8eb42ae-a39f-4524-bb21-92f2097570d8.csv)
+A `text/csv` *Content-Type* response with `;` seperated CSV file. A sample Transferred Transactions file can be [downloaded from here.](assets/files/transferredtransactions/f8eb42ae-a39f-4524-bb21-92f2097570d8.txt)
     
 ### Error Response
 
