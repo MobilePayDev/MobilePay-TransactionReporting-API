@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Under development
+# Released 2020 12
 
 ## Transferred Transactions V2 API
 
@@ -136,3 +136,7 @@ A `text/csv` *Content-Type* response with `;` seperated CSV file. A sample Trans
    * 404 when payment point does not exist
    * 412 when transfer reference is being processed and will become available later
    * 415 when Accept header contains unsupported media type
+
+# Under development
+
+...
