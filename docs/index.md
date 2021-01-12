@@ -573,3 +573,121 @@ $ curl
   --header 'Content-Type: application/json'
   --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```   
+# <a name="transactions_by_merchant_endpoint"/> Get Transferred Transactions By Merchant
+
+Returns a list of all transactions that took place during specified time period for a merchant.
+
+**Note:** data provided by this endpoint represents the latest known state at the time of query. Resubmitting your request might yeld different results if additional transactions have occured during the time between requests.
+
+### URL
+
+  `/transaction-reporting/api/merchant/v2/paymentpoints/transfers?from={fromDate}&to={toDate}&pageToken={pageToken}`
+  
+### Method
+
+  `GET`
+
+### URL Params
+
+Name | Type | Required | Detail
+----- |:-----:|:-----:| -----
+from | [Timestamp](types.md#timestamp) | Yes | Timestamp to filter transactions from (inclusive). Refers to transaction timestamp.
+to | [Timestamp](types.md#timestamp) | Yes |Timestamp to filter transactions to (inclusive). Refers to transaction timestamp.
+pageToken | [Page token](types.md#page-token) | No | Specifies which result data page to retrieve if there are more than one page
+
+### Header params
+  
+Name                | Type    | Required | Detail
+-----               | -----   | -----    | -----
+Authorization       | string  | Yes      | Authorization OpenId reference token - "Bearer xxxx".
+x-ibm-client-id     | string  | Yes      | Api Gateway client Id.
+x-ibm-client-secret | string  | Yes      | Api Gateway client Secrete.
+
+### Success Response
+
+   HTTP 200
+   ```javascript
+  {
+    "transactions": [
+      {
+        "companyRegNo": "string",
+        "merchantName": "string",
+        "paymentPointId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "paymentPointName": "string",
+        "receiverAccount": "string",
+        "type": "string",
+        "amount": 0,
+        "currencyCode": "string",
+        "timestamp": "2021-01-11T20:32:15.649Z",
+        "message": "string",
+        "merchantReference": "string",
+        "merchantPaymentLabel": "string",
+        "paymentTransactionId": "string",
+        "transferReference": "string",
+        "transferReferenceDate": "string",
+        "userIndicator": "string",
+        "loyaltyId": "string",
+        "myShopNumber": "string",
+        "brandName": "string",
+        "brandId": "string",
+        "locationId": "string",
+        "posName": "string",
+        "beaconId": "string",
+        "merchantPayerReference": "string",
+        "agreementId": "string"
+      }
+    ],
+    "nextPageToken": "string"
+  }
+   ```
+
+Name | Type | Required | Detail
+----- |:-----:|:-----:| -----
+transactions            | json array                                           | Yes | A collection of transactions (see below for details)
+companyRegNo            | string                                               | Yes | Public merchant identifier (usually VAT or CVR code)
+merchantName            | string                                               | Yes | Merchant legal name (as registered with MobilePay)
+paymentPointId          | [Guid](types.md#guid)                                | Yes | Unique identifier for a payment point. Corresponds to the provided url parameter.
+paymentPointName        | string                                               | Yes | The registered name of a payment point.
+receiverAccount         | string                                               | Yes | Account number where funds have been transferred to. IBAN or regular account number.
+type                    | [Transaction type](types.md#transaction-type)        | Yes | Specifies transaction type. Possible values are: Payment, Refund, transactionFee, ServiceFee, Transfer, ReturnedTransaction, Payout, Adjustment, Chargeback
+amount                  | [Amount](types.md#amount)                            | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
+currencyCode            | [Currency](types.md#currency)                        | Yes | Transaction currency.
+timestamp               | [Timestamp](types.md#timestamp)                      | Yes | Timestamp when transaction has been completed. Corresponds to url parameters "from" and "to".
+senderComment           | string                                               | No  | Free-form text message provided by payment sender.
+paymentTransactionId    | string                                               | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.
+message                 | string                                               | No  | Free-form text message provided by payment sender.
+merchantReference       | string                                               | No  | MerchantReference is ID that could be provided by merchant / payment integrator when initiating payments. In general, it can be used for correlating transactions between MobilePay and external (merchant/integrator) system.
+merchantPaymentLabel    | string                                               | No  | Similar purpose as MerchantReference but used for correlating transactions with bulk/group id from external (merchant/integrator) system.
+paymentTransactionId    | string                                               | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.
+transferReference       | [Transfer reference](types.md#transfer-reference)    | No  | Bank reference number used for aggregated transfer to receiver account. Null if this transaction has not been transferred yet.
+transferReferenceDate   | [Date](types.md#date)                                | No  | Date used for aggregated transfer reference. Null if this transaction has not been transferred yet.
+userIndicator           | string                                               | No  | The payer's (user) phone number, semi masked
+loyaltyId               | string                                               | No  | Value entered into the MP app for the specific merchant under "memberships"
+myshopNumber            | string                                               | No  | Myshop number
+brandName               | string                                               | No  | POS brand name
+brandId                 | string                                               | No  | POS legacy merchant Id
+locationId              | string                                               | No  | POS merchant location Id
+posName                 | string                                               | No  | POS name
+beaconId                | string                                               | No  | POS beacon Id
+merchantPayerReference  | string                                               | No  | Customer number/reference of payer in merchant's system, created by merchant. 
+agreementId             | string                                               | No  | MobilePay Subscriptions generated agreement Id
+nextPageToken           | [Page token](types.md#page-token)                    | No  | A token used to retrieve next page of results. Null if this is the last page.
+    
+### Error Response
+
+   * 400 when there was a validation problem with the request.
+   * 401 when required authentication headers are missing/invalid in the request
+   * 403 when user is not authorized to access the resource or user account is disabled
+   * 415 when Accept header contains unsupported media type
+   * 500 can happen if something unexpected goes wrong in the API, e.g. an unhandled exception. There is likely to be quite limited error information available in this case and it's best to contact MobilePay, providing details of what request caused the problem and when it was done. One form of 500 error that may be observed is a TimeoutException, which can ocurr when the API server did not receive an expected event after sending a command into the system to be executed. This error should be treated like other unhandled exceptions and reported, rather than ignored like a network timeout might be.
+
+### Sandbox example
+`/transaction-reporting/api/merchant/v2/paymentpoints/transfers?from={fromDate}&to={toDate}&pageToken={pageToken}`
+  ```
+$ curl 
+  --header "Authorization: Bearer abcd1234567890" 
+  --header 'x-ibm-client-id: abcd1234567890' 
+  --header 'x-ibm-client-secret: abcd1234567890'
+  --header 'Content-Type: application/json'
+  --url https://api.sandbox.mobilepay.dk/transaction-reporting/merchant/v2/paymentpoints/transfers?from=2020-06-13T04:44:06Z&to=2020-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
+  ```   
