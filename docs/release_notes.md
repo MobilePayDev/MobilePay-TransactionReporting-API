@@ -6,6 +6,10 @@ layout: default
 
 * [Transferred Transactions V2 API](index#transferred_transactions_v2_endpoint)
 
+# Released 2021 01
+
+* [Transferred Transactions By Merchant](index#transferred_transactions_by_merchant_endpoint)
+
 # Under development
 
 ...

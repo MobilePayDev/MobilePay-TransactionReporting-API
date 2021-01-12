@@ -33,5 +33,5 @@ overview :
 - title: Transactions Endpoint
   url: "index#transactions_endpoint"
   
-- title: Get Transferred Transactions By Merchant
-  url: "index#transactions_by_merchant_endpoint"
+- title: Transferred Transactions By Merchant
+  url: "index#transferred_transactions_by_merchant_endpoint"

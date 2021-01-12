@@ -573,7 +573,7 @@ $ curl
   --header 'Content-Type: application/json'
   --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```   
-# <a name="transactions_by_merchant_endpoint"/> Get Transferred Transactions By Merchant
+# <a name="transferred_transactions_by_merchant_endpoint"/> Transferred Transactions By Merchant
 
 Returns a list of all transactions that took place during specified time period for a merchant.
 
