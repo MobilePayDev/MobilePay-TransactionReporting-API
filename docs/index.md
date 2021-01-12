@@ -679,7 +679,6 @@ nextPageToken           | [Page token](types.md#page-token)                    |
    * 401 when required authentication headers are missing/invalid in the request
    * 403 when user is not authorized to access the resource or user account is disabled
    * 415 when Accept header contains unsupported media type
-   * 415 when Accept header contains unsupported media type
    * 500 can happen if something unexpected goes wrong in the API, e.g. an unhandled exception. There is likely to be quite limited error information available in this case and it's best to contact MobilePay, providing details of what request caused the problem and when it was done. One form of 500 error that may be observed is a TimeoutException, which can ocurr when the API server did not receive an expected event after sending a command into the system to be executed. This error should be treated like other unhandled exceptions and reported, rather than ignored like a network timeout might be.
 
 ### Sandbox example
