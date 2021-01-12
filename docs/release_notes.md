@@ -9,6 +9,7 @@ layout: default
 # Released 2021 01
 
 * [Transferred Transactions By Merchant](index#transferred_transactions_by_merchant_endpoint)
+* [Transactions V2](index#transactions_v2_endpoint)
 
 # Under development
 

@@ -30,8 +30,11 @@ overview :
 - title: Transferred Transactions V2 Endpoint
   url: "index#transferred_transactions_v2_endpoint"
 
-- title: Transactions Endpoint
-  url: "index#transactions_endpoint"
+- title: Transactions V1 Endpoint
+  url: "index#transactions_v1_endpoint"
+
+- title: Transactions V2 Endpoint
+  url: "index#transactions_v2_endpoint"
   
 - title: Transferred Transactions By Merchant
   url: "index#transferred_transactions_by_merchant_endpoint"
