@@ -13,15 +13,23 @@ navbar:
       - page: Transfer References Endpoint
         url:  "index#transfer_references_endpoint"
       - page: Transferred Transactions Endpoint
-        url:  "index#transferred_transactions_v1_endpoint"
+        url:  "index#transferred_transactions_v2_endpoint"
         subfolderitems:
           - page: V1 API
             url:  "index#transferred_transactions_v1_endpoint"
           - page: V2 API
             url:  "index#transferred_transactions_v2_endpoint"
       - page: Transactions Endpoint
-        url:  "index#transactions_endpoint"
+        url:  "index#transactions_v2_endpoint"
+        subfolderitems:
+          - page: V1 API
+            url:  "index#transactions_v1_endpoint"
+          - page: V2 API
+            url:  "index#transactions_v2_endpoint"
+      - page: Transferred Transactions By Merchant Endpoint
+        url:  "index#transferred_transactions_by_merchant_endpoint"
   - title: Types
     url:  "types"
   - title: Release Notes
     url:  "release_notes"
+    
