@@ -484,7 +484,7 @@ A `text/csv` *Content-Type* response with `;` seperated CSV file. A sample Trans
    * 415 when Accept header contains unsupported media type
 
 
-# <a name="transactions_endpoint"/> Transactions Endpoint
+# <a name="transactions_v1_endpoint"/> Transactions V1 Endpoint
 
 Returns a list of all transactions that took place during specified time period for a payment point.
 
@@ -572,8 +572,128 @@ $ curl
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Content-Type: application/json'
   --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
+  ```
+
+# <a name="transactions_v2_endpoint"/> Transactions V2 Endpoint
+
+Returns a list of all transactions that took place during specified time period for a payment point.
+
+**Note:** data provided by this endpoint represents the latest known state at the time of query. Resubmitting your request might yeld different results if additional transactions have occured during the time between requests.
+
+### URL
+
+`/transaction-reporting/api/merchant/v2/paymentpoints/{paymentPointId}/transactions?from={from}&to={to}&pageToken={pageToken}`
+
+### Method
+
+`GET`
+
+### URL Params
+
+Name | Type | Required | Detail
+----- |:-----:|:-----:| -----
+paymentPointId | [Guid](types.md#guid) | Yes | Unique identifier for a payment point.
+from | [Timestamp](types.md#timestamp) | Yes | Timestamp to filter transactions from (inclusive). Refers to transaction timestamp.
+to | [Timestamp](types.md#timestamp) | Yes |Timestamp to filter transactions to (inclusive). Refers to transaction timestamp.
+pageToken | [Page token](types.md#page-token) | No | Specifies which result data page to retrieve if there are more than one page
+
+### Header params
+
+Name                | Type    | Required | Detail
+-----               | -----   | -----    | -----
+Authorization       | string  | Yes      | Authorization OpenId reference token - "Bearer xxxx".
+x-ibm-client-id     | string  | Yes      | Api Gateway client Id.
+x-ibm-client-secret | string  | Yes      | Api Gateway client Secrete.
+
+### Success Response
+
+HTTP 200
+   ```javascript
+    {
+        "companyRegNo": "123456789",                                            
+        "merchantName": "Acme Ltd",
+        "paymentPointId": "08b2f28f-9e5c-4416-ab5a-6338511c8ad1",
+        "paymentPointName": "snack kiosk",
+        "receiverAccount": "DK123400000567891231",
+        "transactions": [
+            {
+                "type": "Payment",
+                "amount": 88,00
+                "currencyCode": "DKK",
+                "timestamp": "2020-10-13T04:44:06Z",
+                "message": "Flowers for Anafora",                               
+                "merchantReference": "QWERTY123456798"                          
+                "merchantPaymentLabel": "Ref: AB22",                            
+                "paymentTransactionId": "AABBCCDD11223344",
+                "transferReference": "02020180624123456789",                    
+                "transferReferenceDate": "2020-10-14",                          
+                "userIndicator": "****1234" || NULL,                            
+                "loyaltyId": "22499111" || NULL,                                
+                "myshopNumber": "77643" || NULL,                                
+                "brandName": "Acme Inc" || NULL,                                
+                "brandId": "1234567" || NULL,                                   
+                "locationId": "56789" || NULL,                                  
+                "posName": "bakery" || NULL,                                    
+                "beaconId": "AAV2f28f-3322-4416-ab5a-BB98511c82AD" || NULL,     
+                "merchantPayerReference": "22449122" || NULL,                   
+                "agreementId": "57b2f28f-9e5c-4416-ab5a-633345678ad1" || NULL,  
+            }
+        ],
+        "nextPageToken": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+    }
+   ```
+
+Name                 | Type                                                 | Required | Detail
+-----                |-----                                                 |-----| -----
+companyRegNo         | string                                               | Yes | Public merchant identifier (usually VAT or CVR code)
+merchantName         | string                                               | Yes | Merchant legal name (as registered with MobilePay)
+paymentPointId       | [Guid](types.md#guid)                                | Yes | Unique identifier for a payment point. Corresponds to the provided url parameter.
+paymentPointName     | string                                               | Yes | The registered name of a payment point.
+receiverAccount      | string                                               | Yes | Account number where funds have been transferred to. IBAN or regular account number.
+transactions         | object[]                                             | Yes | A collection of transactions (see below for details)
+type                 | [Transaction type](types.md#transaction-type)        | Yes | Specifies transaction type. Possible values are: Payment, Refund, TransactionFee, ServiceFee, ReturnedTransaction, Payout, Adjustment, Chargeback
+amount               | [Amount](types.md#amount)                            | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
+currencyCode         | [Currency](types.md#currency)                        | Yes | Transaction currency.
+timestamp            | [Timestamp](types.md#timestamp)                      | Yes | Timestamp when transaction has been completed.
+message              | string                                               | No  | Free-form text message provided by payment sender.
+merchantReference    | string                                               | No  | MerchantReference is ID that could be provided by merchant / payment integrator when initiating payments. In general, it can be used for correlating transactions between MobilePay and external (merchant/integrator) system.
+merchantPaymentLabel | string                                               | No  | Similar purpose as MerchantReference but used for correlating transactions with bulk/group id from external (merchant/integrator) system.
+paymentTransactionId | string                                               | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.
+transferReference    | [Transfer reference](types.md#transfer-reference)    | Yes | Bank reference number used for aggregated transfer to receiver account. Corresponds to url parameter.
+transferReferenceDate| [Date](types.md#date)                                | Yes | Date used for aggregated transfer reference. Might be different from the date when transfer actually was made.
+userIndicator        | string                                               | No  | The payer's (user) phone number, semi masked
+loyaltyId            | string                                               | No  | Value entered into the MP app for the specific merchant under "memberships"
+myshopNumber         | string                                               | No  | Myshop number
+brandName            | string                                               | No  | POS brand name
+brandId              | string                                               | No  | POS legacy merchant Id
+locationId           | string                                               | No  | POS merchant location Id
+posName              | string                                               | No  | POS name
+beaconId             | string                                               | No  | POS beacon Id
+merchantPayerReference| string                                              | No  | Customer number/reference of payer in merchant's system, created by merchant.
+agreementId          | string                                               | No  | MobilePay Subscriptions generated agreement Id
+nextPageToken        | [Page token](types.md#page-token)                    | No  | A token used to retrieve next page of results. Null if this is the last page.
+
+### Error Response
+
+* 400 when there was a validation problem with the request.
+* 401 when required authentication headers are missing/invalid in the request
+* 403 when user is not authorized to access the resource or user account is disabled
+* 404 when payment point does not exist
+* 415 when Accept header contains unsupported media type
+* 500 can happen if something unexpected goes wrong in the API, e.g. an unhandled exception. There is likely to be quite limited error information available in this case and it's best to contact MobilePay, providing details of what request caused the problem and when it was done. One form of 500 error that may be observed is a TimeoutException, which can ocurr when the API server did not receive an expected event after sending a command into the system to be executed. This error should be treated like other unhandled exceptions and reported, rather than ignored like a network timeout might be.
+
+### Sandbox example
+`/transaction-reporting/api/merchant/v2/paymentpoints/{paymentPointId}/transactions?from={from}&to={to}&pageToken={pageToken}`
+  ```
+$ curl 
+  --header "Authorization: Bearer abcd1234567890" 
+  --header 'x-ibm-client-id: abcd1234567890' 
+  --header 'x-ibm-client-secret: abcd1234567890'
+  --header 'Content-Type: application/json'
+  --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v2/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```   
-# <a name="transactions_by_merchant_endpoint"/> Get Transferred Transactions By Merchant
+
+# <a name="transferred_transactions_by_merchant_endpoint"/> Transferred Transactions By Merchant Endpoint
 
 Returns a list of all transactions that took place during specified time period for a merchant.
 
