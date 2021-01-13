@@ -609,38 +609,38 @@ x-ibm-client-secret | string  | Yes      | Api Gateway client Secrete.
 
 HTTP 200
    ```javascript
-  {
-        "companyRegNo": "string",
-        "merchantName": "string",
-        "paymentPointId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        "paymentPointName": "string",
-        "transferReference": "string",
-        "transferReferenceDate": "string",
-        "receiverAccount": "string",
+    {
+        "companyRegNo": "123456789",                                            
+        "merchantName": "Acme Ltd",
+        "paymentPointId": "08b2f28f-9e5c-4416-ab5a-6338511c8ad1",
+        "paymentPointName": "snack kiosk",
+        "receiverAccount": "DK123400000567891231",
         "transactions": [
-        {
-            "type": "string",
-            "amount": 0,
-            "currencyCode": "string",
-            "timestamp": "2021-01-12T14:09:24.766Z",
-            "message": "string",
-            "merchantReference": "string",
-            "merchantPaymentLabel": "string",
-            "paymentTransactionId": "string",
-            "userIndicator": "string",
-            "loyaltyId": "string",
-            "myShopNumber": "string",
-            "brandName": "string",
-            "brandId": "string",
-            "locationId": "string",
-            "posName": "string",
-            "beaconId": "string",
-            "merchantPayerReference": "string",
-            "agreementId": "string"
-        }
-    ],
-        "nextPageToken": "string"
-}
+            {
+                "type": "Payment",
+                "amount": 88,00
+                "currencyCode": "DKK",
+                "timestamp": "2020-10-13T04:44:06Z",
+                "message": "Flowers for Anafora",                               
+                "merchantReference": "QWERTY123456798"                          
+                "merchantPaymentLabel": "Ref: AB22",                            
+                "paymentTransactionId": "AABBCCDD11223344",
+                "transferReference": "02020180624123456789",                    
+                "transferReferenceDate": "2020-10-14",                          
+                "userIndicator": "****1234" || NULL,                            
+                "loyaltyId": "22499111" || NULL,                                
+                "myshopNumber": "77643" || NULL,                                
+                "brandName": "Acme Inc" || NULL,                                
+                "brandId": "1234567" || NULL,                                   
+                "locationId": "56789" || NULL,                                  
+                "posName": "bakery" || NULL,                                    
+                "beaconId": "AAV2f28f-3322-4416-ab5a-BB98511c82AD" || NULL,     
+                "merchantPayerReference": "22449122" || NULL,                   
+                "agreementId": "57b2f28f-9e5c-4416-ab5a-633345678ad1" || NULL,  
+            }
+        ],
+        "nextPageToken": "CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"
+    }
    ```
 
 Name                 | Type                                                 | Required | Detail
@@ -649,8 +649,6 @@ companyRegNo         | string                                               | Ye
 merchantName         | string                                               | Yes | Merchant legal name (as registered with MobilePay)
 paymentPointId       | [Guid](types.md#guid)                                | Yes | Unique identifier for a payment point. Corresponds to the provided url parameter.
 paymentPointName     | string                                               | Yes | The registered name of a payment point.
-transferReference    | [Transfer reference](types.md#transfer-reference)    | Yes | Bank reference number used for aggregated transfer to receiver account. Corresponds to url parameter.
-transferReferenceDate| [Date](types.md#date)                                | Yes | Date used for aggregated transfer reference. Might be different from the date when transfer actually was made.
 receiverAccount      | string                                               | Yes | Account number where funds have been transferred to. IBAN or regular account number.
 transactions         | object[]                                             | Yes | A collection of transactions (see below for details)
 type                 | [Transaction type](types.md#transaction-type)        | Yes | Specifies transaction type. Possible values are: Payment, Refund, TransactionFee, ServiceFee, ReturnedTransaction, Payout, Adjustment, Chargeback
@@ -661,6 +659,8 @@ message              | string                                               | No
 merchantReference    | string                                               | No  | MerchantReference is ID that could be provided by merchant / payment integrator when initiating payments. In general, it can be used for correlating transactions between MobilePay and external (merchant/integrator) system.
 merchantPaymentLabel | string                                               | No  | Similar purpose as MerchantReference but used for correlating transactions with bulk/group id from external (merchant/integrator) system.
 paymentTransactionId | string                                               | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.
+transferReference    | [Transfer reference](types.md#transfer-reference)    | Yes | Bank reference number used for aggregated transfer to receiver account. Corresponds to url parameter.
+transferReferenceDate| [Date](types.md#date)                                | Yes | Date used for aggregated transfer reference. Might be different from the date when transfer actually was made.
 userIndicator        | string                                               | No  | The payer's (user) phone number, semi masked
 loyaltyId            | string                                               | No  | Value entered into the MP app for the specific merchant under "memberships"
 myshopNumber         | string                                               | No  | Myshop number
