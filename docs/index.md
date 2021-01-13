@@ -597,6 +597,14 @@ from | [Timestamp](types.md#timestamp) | Yes | Timestamp to filter transactions 
 to | [Timestamp](types.md#timestamp) | Yes |Timestamp to filter transactions to (inclusive). Refers to transaction timestamp.
 pageToken | [Page token](types.md#page-token) | No | Specifies which result data page to retrieve if there are more than one page
 
+### Header params
+
+Name                | Type    | Required | Detail
+-----               | -----   | -----    | -----
+Authorization       | string  | Yes      | Authorization OpenId reference token - "Bearer xxxx".
+x-ibm-client-id     | string  | Yes      | Api Gateway client Id.
+x-ibm-client-secret | string  | Yes      | Api Gateway client Secrete.
+
 ### Success Response
 
 HTTP 200
