@@ -1,34 +1,27 @@
-overview_title: Overview
-overview_url: "index#overview"
-
-types_title: Types
-types_url: "types"
-
-release_notes_title: Release Notes
-release_notes_url: "release_notes"
-
-
-overview :
-- title: Authentication
-  url: "index#authentication"
-
-- title: General notes
-  url: "index#general_notes"
-
-- title: PaymentPointId
-  url: "index#payment_point_id"
-
-- title: Payment Points Endpoint
-  url: "index#payment_points_endpoint"
-
-- title: Transfer References Endpoint
-  url: "index#transfer_references_endpoint"
-
-- title: Transferred Transactions V1 Endpoint
-  url: "index#transferred_transactions_v1_endpoint"
-
-- title: Transferred Transactions V2 Endpoint
-  url: "index#transferred_transactions_v2_endpoint"
-
-- title: Transactions Endpoint
-  url: "index#transactions_endpoint"
+navbar:
+  - title: Overview
+    url:  "index#overview"
+    subfolderitems:
+      - page: Authentication
+        url:  "index#authentication"
+      - page: General notes
+        url:  "index#general_notes"
+      - page: PaymentPointId
+        url:  "index#payment_point_id"
+      - page: Payment Points Endpoint
+        url:  "index#payment_points_endpoint"
+      - page: Transfer References Endpoint
+        url:  "index#transfer_references_endpoint"
+      - page: Transferred Transactions Endpoint
+        url:  "index#transferred_transactions_v1_endpoint"
+        subfolderitems:
+          - page: V1 API
+            url:  "index#transferred_transactions_v1_endpoint"
+          - page: V2 API
+            url:  "index#transferred_transactions_v2_endpoint"
+      - page: Transactions Endpoint
+        url:  "index#transactions_endpoint"
+  - title: Types
+    url:  "types"
+  - title: Release Notes
+    url:  "release_notes"
