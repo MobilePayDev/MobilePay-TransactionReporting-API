@@ -722,6 +722,7 @@ Name                | Type    | Required | Detail
 Authorization       | string  | Yes      | Authorization OpenId reference token - "Bearer xxxx".
 x-ibm-client-id     | string  | Yes      | Api Gateway client Id.
 x-ibm-client-secret | string  | Yes      | Api Gateway client Secrete.
+Accept              | string  | No       | A value used to negotiate response 'Content-Type'. Available values `application/json` and `text/csv`. If header value contains `text/csv` endpoint returns csv file, otherwise will default to JSON format.
 
 ### Success Response
 
@@ -801,7 +802,7 @@ nextPageToken           | [Page token](types.md#page-token)                    |
    * 415 when Accept header contains unsupported media type
    * 500 can happen if something unexpected goes wrong in the API, e.g. an unhandled exception. There is likely to be quite limited error information available in this case and it's best to contact MobilePay, providing details of what request caused the problem and when it was done. One form of 500 error that may be observed is a TimeoutException, which can ocurr when the API server did not receive an expected event after sending a command into the system to be executed. This error should be treated like other unhandled exceptions and reported, rather than ignored like a network timeout might be.
 
-### Sandbox example
+### Sandbox JSON request example
 `/transaction-reporting/api/merchant/v2/paymentpoints/transfers?from={fromDate}&to={toDate}&pageToken={pageToken}`
   ```
 $ curl 
@@ -811,3 +812,13 @@ $ curl
   --header 'Content-Type: application/json'
   --url https://api.sandbox.mobilepay.dk/transaction-reporting/merchant/v2/paymentpoints/transfers?from=2020-06-13T04:44:06Z&to=2020-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```   
+### Sandbox CSV request example
+`/transaction-reporting/api/merchant/v2/paymentpoints/transfers?from={fromDate}&to={toDate}&pageToken={pageToken}`
+  ```
+$ curl 
+  --header "Authorization: Bearer abcd1234567890" 
+  --header 'x-ibm-client-id: abcd1234567890' 
+  --header 'x-ibm-client-secret: abcd1234567890'
+  --header 'Accept: text/csv'
+  --url https://api.sandbox.mobilepay.dk/transaction-reporting/merchant/v2/paymentpoints/transfers?from=2020-06-13T04:44:06Z&to=2020-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
+  ```  
