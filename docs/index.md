@@ -576,9 +576,9 @@ $ curl
 
 # <a name="transactions_v2_endpoint"/> Transactions V2 Endpoint
 
-Returns a list of all transactions that took place during specified time period for a payment point.
+Returns a report of all sales transactions for a payment point for the queried period.
+**Note:** data provided by this endpoint represents the latest known state at the time of query. Resubmitting your request might yeld different results if additional transactions have occured during the time between requests. 
 
-**Note:** data provided by this endpoint represents the latest known state at the time of query. Resubmitting your request might yeld different results if additional transactions have occured during the time between requests.
 
 ### URL
 
