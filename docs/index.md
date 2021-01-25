@@ -352,8 +352,7 @@ $ curl
 
 # <a name="transferred_transactions_v2_endpoint"/> Transferred Transactions V2 Endpoint
 
-In order to retrieve transactions from completed transfer with MobilePay products specific data points a new endpoint can be used: 
-
+Receive a full report of the content of settlement transfers. Includes a line by line specification of your sales, fees, refunds etc. that make up settlement transfers 
 ### URL
 
  `/transaction-reporting/api/merchant/v2/paymentpoints/{paymentPointID}/transfers/{transferReference}?pageToken={pageToken}`
