@@ -34,7 +34,7 @@ When the merchant is onboarded, he has a user in MobilePay that is able to manag
 
 Client: In order for this to work, the merchant must grant consent to an application(Client). The client is the application that is attempting to get access to the user’s account. This consent is granted through mechanism in the [OpenID Connect](http://openid.net/connect/) protocol suite.
 
-lient must initiate the [hybrid flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth) specified in OpenID connect. For Transaction Reporting product the Client must request consent from the merchant using the `transactionreporting` scope. You also need to specify `offline_access` scope, in order to get the refresh token. The authorization server in sandbox is [located here](https://api.sandbox.mobilepay.dk/merchant-authentication-openidconnect).
+lient must initiate the [hybrid flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth) specified in OpenID connect. For Transaction Reporting product the Client must request consent from the merchant using the `transactionreporting` scope. You also need to specify `offline_access` scope, in order to get the refresh token. The authorization server is [located here](https://api.mobilepay.dk/merchant-authentication-openidconnect).
 
 If the merchant grants consent, an authorization code is returned which the Client must exchange for an id token, an access token and a refresh token. The refresh token is used to refresh ended sessions without asking for merchant consent again. This means that if the Client receives an answer from the api gateway saying that the access token is invalid, the refresh token is exchanged for a new access token and refresh token. 
 
@@ -100,7 +100,7 @@ When data pagination is used `NextPageToken` property is returned inside of requ
 #### Paging example
 
 Initial query url is:
-`https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z`
+`https://api.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z`
 
 Returned response is:   
    ```javascript
@@ -129,7 +129,7 @@ Returned response is:
   }
    ```
 In order to retrieve the next page, you shuould call:
-`https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA`
+`https://api.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA`
 
 ### Error codes
 
@@ -185,7 +185,7 @@ paymentPointName | string | Name of the Payment Point.
    * 403 when the access token doesn't contain a merchant_id claim.
    * 409 when the merchant could not be found.
    
-### Sandbox example
+### Example
 
   ```
 $ curl 
@@ -193,7 +193,7 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890' 
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Content-Type: application/json'
-  --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints
+  --url https://api.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints
   ```
  
 # <a name="transfer_references_endpoint"/> Transfer References Endpoint
@@ -250,7 +250,7 @@ currencyCode | [Currency](types.md#currency) | Yes | Transfer currency.
    * 403 when user is not authorized to access the resource or user account is disabled
    * 404 when payment point does not exist
    
-### Sandbox example
+### Example
 
   ```
 $ curl 
@@ -258,7 +258,7 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890' 
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Content-Type: application/json'
-  --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transfer-references?from=2018-09-18&to=2018-09-23
+  --url https://api.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transfer-references?from=2018-09-18&to=2018-09-23
   ```
    
 # <a name="transferred_transactions_v1_endpoint"/> Transferred Transactions V1 Endpoint
@@ -339,7 +339,7 @@ nextPageToken | [Page token](types.md#page-token) | No | A token used to retriev
    * 404 when payment point does not exist
    * 412 when transfer reference is being processed and will become available later
 
-### Sandbox example
+### Example
 
   ```
 $ curl 
@@ -347,7 +347,7 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890' 
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Content-Type: application/json'
-  --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transfers/00020180624123456789?pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
+  --url https://api.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transfers/00020180624123456789?pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```   
 
 # <a name="transferred_transactions_v2_endpoint"/> Transferred Transactions V2 Endpoint
@@ -380,7 +380,7 @@ x-ibm-client-id     | string  | Yes      | Api Gateway client Id.
 x-ibm-client-secret | string  | Yes      | Api Gateway client Secrete.
 Accept              | string  | No       | A value used to negotiate response 'Content-Type'. Available values `application/json` and `text/csv`. If header value contains `text/csv` endpoint returns csv file, otherwise will default to JSON format.
 
-### Sandbox JSON request example
+### JSON request example
 
   ```
 $ curl 
@@ -388,10 +388,10 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890'
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Accept: application/json'
-  --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v2/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transfers/00020180624123456789?pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
+  --url https://api.mobilepay.dk/transaction-reporting/api/merchant/v2/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transfers/00020180624123456789?pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```
 
-### Sandbox CSV request example
+### CSV request example
 
   ```
 $ curl 
@@ -399,7 +399,7 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890'
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Accept: text/csv'
-  --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v2/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transfers/00020180624123456789?pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
+  --url https://api.mobilepay.dk/transaction-reporting/api/merchant/v2/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transfers/00020180624123456789?pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```
   
 ### Success JSON Response
@@ -563,7 +563,7 @@ nextPageToken | [Page token](types.md#page-token) | No | A token used to retriev
    * 403 when user is not authorized to access the resource or user account is disabled
    * 404 when payment point does not exist
 
-### Sandbox example
+### Example
 `/transaction-reporting/api/merchant/v1/paymentpoints/{paymentPointID}/transactions?from={fromTimestamp}&to={toTimestamp}`
   ```
 $ curl 
@@ -571,7 +571,7 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890' 
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Content-Type: application/json'
-  --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
+  --url https://api.mobilepay.dk/transaction-reporting/api/merchant/v1/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```
 
 # <a name="transactions_v2_endpoint"/> Transactions V2 Endpoint
@@ -682,7 +682,7 @@ nextPageToken        | [Page token](types.md#page-token)                    | No
 * 415 when Accept header contains unsupported media type
 * 500 can happen if something unexpected goes wrong in the API, e.g. an unhandled exception. There is likely to be quite limited error information available in this case and it's best to contact MobilePay, providing details of what request caused the problem and when it was done. One form of 500 error that may be observed is a TimeoutException, which can ocurr when the API server did not receive an expected event after sending a command into the system to be executed. This error should be treated like other unhandled exceptions and reported, rather than ignored like a network timeout might be.
 
-### Sandbox example
+### Example
 `/transaction-reporting/api/merchant/v2/paymentpoints/{paymentPointId}/transactions?from={from}&to={to}&pageToken={pageToken}`
   ```
 $ curl 
@@ -690,7 +690,7 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890' 
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Content-Type: application/json'
-  --url https://api.sandbox.mobilepay.dk/transaction-reporting/api/merchant/v2/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
+  --url https://api.mobilepay.dk/transaction-reporting/api/merchant/v2/paymentpoints/37b8450b-579b-489d-8698-c7800c65934c/transactions?from=2018-06-13T04:44:06Z&to=2018-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```   
 
 # <a name="transferred_transactions_by_merchant_endpoint"/> Transferred Transactions By Merchant Endpoint
@@ -801,7 +801,7 @@ nextPageToken           | [Page token](types.md#page-token)                    |
    * 415 when Accept header contains unsupported media type
    * 500 can happen if something unexpected goes wrong in the API, e.g. an unhandled exception. There is likely to be quite limited error information available in this case and it's best to contact MobilePay, providing details of what request caused the problem and when it was done. One form of 500 error that may be observed is a TimeoutException, which can ocurr when the API server did not receive an expected event after sending a command into the system to be executed. This error should be treated like other unhandled exceptions and reported, rather than ignored like a network timeout might be.
 
-### Sandbox example
+### xample
 `/transaction-reporting/api/merchant/v2/paymentpoints/transfers?from={fromDate}&to={toDate}&pageToken={pageToken}`
   ```
 $ curl 
@@ -809,5 +809,5 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890' 
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Content-Type: application/json'
-  --url https://api.sandbox.mobilepay.dk/transaction-reporting/merchant/v2/paymentpoints/transfers?from=2020-06-13T04:44:06Z&to=2020-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
+  --url https://api.mobilepay.dk/transaction-reporting/merchant/v2/paymentpoints/transfers?from=2020-06-13T04:44:06Z&to=2020-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```   
