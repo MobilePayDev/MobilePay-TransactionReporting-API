@@ -819,5 +819,5 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890' 
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Accept: text/csv'
-  --url https://api.sandbox.mobilepay.dk/transaction-reporting/merchant/v2/paymentpoints/transfers?from=2020-06-13T04:44:06Z&to=2020-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
+  --url https://api.mobilepay.dk/transaction-reporting/merchant/v2/paymentpoints/transfers?from=2020-06-13T04:44:06Z&to=2020-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```  
