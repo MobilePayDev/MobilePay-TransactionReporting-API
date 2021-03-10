@@ -708,11 +708,11 @@ Returns a list of all transactions that took place during specified time period 
 
 ### URL Params
 
-Name | Type | Required | Detail
------ |:-----:|:-----:| -----
-from | [Timestamp](types.md#timestamp) | Yes | Timestamp to filter transactions from (inclusive). Refers to transaction timestamp.
-to | [Timestamp](types.md#timestamp) | Yes |Timestamp to filter transactions to (inclusive). Refers to transaction timestamp.
-pageToken | [Page token](types.md#page-token) | No | Specifies which result data page to retrieve if there are more than one page
+Name      | Type                              | Required  | Detail
+-----     | -----                             | -----     | -----
+from      | [Date](types.md#date)             | Yes       | Date to filter transferred transactions results (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
+to        | [Date](types.md#date)             | Yes       | Date to filter transferred transactions results (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
+pageToken | [Page token](types.md#page-token) | No        | Specifies which result data page to retrieve if there are more than one page
 
 ### Header params
   
@@ -809,7 +809,7 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890' 
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Content-Type: application/json'
-  --url https://api.mobilepay.dk/transaction-reporting/merchant/v2/paymentpoints/transfers?from=2020-06-13T04:44:06Z&to=2020-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
+  --url https://api.mobilepay.dk/transaction-reporting/merchant/v2/paymentpoints/transfers?from=2020-06-13&to=2020-06-14&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```   
 ### CSV request example
 `/transaction-reporting/api/merchant/v2/paymentpoints/transfers?from={fromDate}&to={toDate}&pageToken={pageToken}`
@@ -819,5 +819,5 @@ $ curl
   --header 'x-ibm-client-id: abcd1234567890' 
   --header 'x-ibm-client-secret: abcd1234567890'
   --header 'Accept: text/csv'
-  --url https://api.mobilepay.dk/transaction-reporting/merchant/v2/paymentpoints/transfers?from=2020-06-13T04:44:06Z&to=2020-06-13T23:00:00Z&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
+  --url https://api.mobilepay.dk/transaction-reporting/merchant/v2/paymentpoints/transfers?from=2020-06-13&to=2020-06-14&pageToken=CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA
   ```  
