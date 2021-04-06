@@ -324,7 +324,7 @@ transferReference | [Transfer reference](types.md#transfer-reference) | Yes | Ba
 transferReferenceDate | [Date](types.md#date) | Yes | Date used for aggregated transfer reference. Might be different from the date when transfer actually was made.
 receiverAccount | string | Yes | Account number where funds have been transferred to. IBAN or regular account number.
 transactions | json array | Yes | A collection of transactions (see below for details)
-type | [Transaction type](types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, TransactionFee, ServiceFee, ReturnedTransaction, Payout, Adjustment, Chargeback
+type | [Transaction type](types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, TransactionFee, ServiceFee, ReturnedTransaction, Adjustment
 amount | [Amount](types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
 currencyCode | [Currency](types.md#currency) | Yes | Transaction currency.
 timestamp | [Timestamp](types.md#timestamp) | Yes | Timestamp when transaction has been completed.
@@ -453,7 +453,7 @@ transferReference    | [Transfer reference](types.md#transfer-reference)    | Ye
 transferReferenceDate| [Date](types.md#date)                                | Yes | Date used for aggregated transfer reference. Might be different from the date when transfer actually was made.
 receiverAccount      | string                                               | Yes | Account number where funds have been transferred to. IBAN or regular account number.
 transactions         | object[]                                             | Yes | A collection of transactions (see below for details)
-type                 | [Transaction type](types.md#transaction-type)        | Yes | Specifies transaction type. Possible values are: Payment, Refund, TransactionFee, ServiceFee, ReturnedTransaction, Payout, Adjustment, Chargeback
+type                 | [Transaction type](types.md#transaction-type)        | Yes | Specifies transaction type. Possible values are: Payment, Refund, TransactionFee, ServiceFee, ReturnedTransaction, Adjustment
 amount               | [Amount](types.md#amount)                            | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
 currencyCode         | [Currency](types.md#currency)                        | Yes | Transaction currency.
 timestamp            | [Timestamp](types.md#timestamp)                      | Yes | Timestamp when transaction has been completed.
@@ -548,7 +548,7 @@ paymentPointId | [Guid](types.md#guid) | Yes | Unique identifier for a payment p
 paymentPointName | string | Yes | The registered name of a payment point.
 receiverAccount | string | Yes | Account number where funds have been transferred to. IBAN or regular account number.
 transactions | json array | Yes | A collection of transactions (see below for details)
-type | [Transaction type](types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, transactionFee, ServiceFee, Transfer, ReturnedTransaction, Payout, Adjustment, Chargeback
+type | [Transaction type](types.md#transaction-type) | Yes | Specifies transaction type. Possible values are: Payment, Refund, transactionFee, ServiceFee, Transfer, ReturnedTransaction, Adjustment
 amount | [Amount](types.md#amount) | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
 currencyCode | [Currency](types.md#currency) | Yes | Transaction currency.
 timestamp | [Timestamp](types.md#timestamp) | Yes | Timestamp when transaction has been completed. Corresponds to url parameters "fromDateTimeOffset" and "toDateTimeOffset".
@@ -656,7 +656,7 @@ paymentPointId       | [Guid](types.md#guid)                                | Ye
 paymentPointName     | string                                               | Yes | The registered name of a payment point.
 receiverAccount      | string                                               | Yes | Account number where funds have been transferred to. IBAN or regular account number.
 transactions         | object[]                                             | Yes | A collection of transactions (see below for details)
-type                 | [Transaction type](types.md#transaction-type)        | Yes | Specifies transaction type. Possible values are: Payment, Refund, TransactionFee, ServiceFee, ReturnedTransaction, Payout, Adjustment, Chargeback
+type                 | [Transaction type](types.md#transaction-type)        | Yes | Specifies transaction type. Possible values are: Payment, Refund, TransactionFee, ServiceFee, ReturnedTransaction, Adjustment
 amount               | [Amount](types.md#amount)                            | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
 currencyCode         | [Currency](types.md#currency)                        | Yes | Transaction currency.
 timestamp            | [Timestamp](types.md#timestamp)                      | Yes | Timestamp when transaction has been completed.
@@ -776,7 +776,7 @@ merchantName            | string                                               |
 paymentPointId          | [Guid](types.md#guid)                                | Yes | Unique identifier for a payment point. Corresponds to the provided url parameter.
 paymentPointName        | string                                               | Yes | The registered name of a payment point.
 receiverAccount         | string                                               | Yes | Account number where funds have been transferred to. IBAN or regular account number.
-type                    | [Transaction type](types.md#transaction-type)        | Yes | Specifies transaction type. Possible values are: Payment, Refund, transactionFee, ServiceFee, Transfer, ReturnedTransaction, Payout, Adjustment, Chargeback
+type                    | [Transaction type](types.md#transaction-type)        | Yes | Specifies transaction type. Possible values are: Payment, Refund, transactionFee, ServiceFee, Transfer, ReturnedTransaction, Adjustment
 amount                  | [Amount](types.md#amount)                            | Yes | Transaction amount. Positive for debit transactions, negative for credit transactions.
 currencyCode            | [Currency](types.md#currency)                        | Yes | Transaction currency.
 timestamp               | [Timestamp](types.md#timestamp)                      | Yes | Timestamp when transaction has been completed. Corresponds to url parameters "from" and "to".

@@ -51,9 +51,7 @@ string | Enum representing supported transaction types | Payment - Incoming paym
 || ServiceFee - Fee based on other services provided by MobilePay (onboarding fee, recurring charges etc.).
 || Transfer - Transfer of money from Merchant wallet to Merchant account.
 || ReturnedTransaction - Failed (sent back) transfers, refunds and payouts.
-|| Payout - Payout to a customer without prior payment.
 || Adjustment - Manual corrections affecting wallet balance.
-|| Chargeback - Reversal of a prior outbound transaction because of dispute.
 
 ## Page token
 
