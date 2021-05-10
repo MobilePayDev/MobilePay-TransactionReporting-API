@@ -52,7 +52,13 @@ In order to authenticate to the API, all requests to the API must contain at lea
 2. `x-ibm-client-secret`
 3. `Authorization`
 
-`$ curl --header "Authorization: Bearer <token>" --header 'x-ibm-client-id: client-id' --header 'x-ibm-client-secret: client-secret' --url https://<mobile-pay-root>/api/merchants/me/resource`
+```
+$ curl 
+    --header 'Authorization: Bearer <token>' 
+    --header 'x-ibm-client-id: client-id' 
+    --header 'x-ibm-client-secret: client-secret' 
+    --url https://<mobile-pay-root>/api/merchants/me/resource
+```
 
 ### Implementing OpenID Connect protocol
 Although the protocol is not that complicated, there is no need to implement it yourself! There are many OpenID Connect certified libraries for different platforms, so you just have to chose the one, that suits you best [from this list](http://openid.net/developers/certified/#RPLibs).
