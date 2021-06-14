@@ -212,7 +212,7 @@ Returns a list of completed transfer references for a payment point.
 
 ### URL
 
-  `/transaction-reporting/api/merchant/v1/paymentpoints/{paymentPointID}/transfer-references?from={fromDate}&to={toDate}`
+  `/transaction-reporting/api/merchant/v1/paymentpoints/{paymentPointID}/transfer-references?from={from}&to={to}`
   
 ### Method
 
@@ -223,8 +223,8 @@ Returns a list of completed transfer references for a payment point.
 Name | Type | Required | Detail
 ----- |:-----:|:-----:| -----
 paymentPointID | [Guid](types.md#guid) | Yes | Unique identifier for a payment point. 
-fromDate | [Date](types.md#date) | Yes | Date to filter transfer reference results from (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
-toDate | [Date](types.md#date) | Yes | Date to filter transfer reference results to (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
+from | [Date](types.md#date) | Yes | Date to filter transfer reference results from (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
+to | [Date](types.md#date) | Yes | Date to filter transfer reference results to (inclusive). Value refers to transfer reference date field, not the actual date / time when the transfer has been made
   
 ### Success Response
 
