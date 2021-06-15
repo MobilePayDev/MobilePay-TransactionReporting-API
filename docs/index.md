@@ -467,7 +467,7 @@ message              | string                                               | No
 merchantReference    | string                                               | No  | MerchantReference is ID that could be provided by merchant / payment integrator when initiating payments. In general, it can be used for correlating transactions between MobilePay and external (merchant/integrator) system.
 merchantPaymentLabel | string                                               | No  | Similar purpose as MerchantReference but used for correlating transactions with bulk/group id from external (merchant/integrator) system.
 paymentTransactionId | string                                               | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.
-userIndicator        | string                                               | No  | The payer's (user) phone number, semi masked
+userIndicator        | string                                               | No  | The payer's (user) phone number, semi masked (currentlly not populated).
 loyaltyId            | string                                               | No  | Value entered into the MP app for the specific merchant under "memberships"
 myshopNumber         | string                                               | No  | Myshop number
 brandName            | string                                               | No  | POS brand name
@@ -672,7 +672,7 @@ merchantPaymentLabel | string                                               | No
 paymentTransactionId | string                                               | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.
 transferReference    | [Transfer reference](types.md#transfer-reference)    | Yes | Bank reference number used for aggregated transfer to receiver account. Corresponds to url parameter.
 transferReferenceDate| [Date](types.md#date)                                | Yes | Date used for aggregated transfer reference. Might be different from the date when transfer actually was made.
-userIndicator        | string                                               | No  | The payer's (user) phone number, semi masked
+userIndicator        | string                                               | No  | The payer's (user) phone number, semi masked (currentlly not populated).
 loyaltyId            | string                                               | No  | Value entered into the MP app for the specific merchant under "memberships"
 myshopNumber         | string                                               | No  | Myshop number
 brandName            | string                                               | No  | POS brand name
@@ -794,7 +794,7 @@ merchantPaymentLabel    | string                                               |
 paymentTransactionId    | string                                               | Yes | Unique payment provider transaction id used when collecting funds for this individual transaction.
 transferReference       | [Transfer reference](types.md#transfer-reference)    | No  | Bank reference number used for aggregated transfer to receiver account. Null if this transaction has not been transferred yet.
 transferReferenceDate   | [Date](types.md#date)                                | No  | Date used for aggregated transfer reference. Null if this transaction has not been transferred yet.
-userIndicator           | string                                               | No  | The payer's (user) phone number, semi masked
+userIndicator           | string                                               | No  | The payer's (user) phone number, semi masked (currentlly not populated).
 loyaltyId               | string                                               | No  | Value entered into the MP app for the specific merchant under "memberships"
 myshopNumber            | string                                               | No  | Myshop number
 brandName               | string                                               | No  | POS brand name
