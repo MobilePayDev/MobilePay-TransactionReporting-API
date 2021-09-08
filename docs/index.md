@@ -604,8 +604,8 @@ Returns a report of all sales transactions for a payment point for the queried p
 Name | Type | Required | Detail
 ----- |:-----:|:-----:| -----
 paymentPointId | [Guid](types.md#guid) | Yes | Unique identifier for a payment point.
-from | [Timestamp](types.md#timestamp) | Yes | Timestamp to filter transactions from (inclusive). Refers to transaction timestamp.
-to | [Timestamp](types.md#timestamp) | Yes |Timestamp to filter transactions to (inclusive). Refers to transaction timestamp.
+from | [Timestamp](types.md#timestamp) | No | Timestamp to filter transactions from (inclusive). Refers to transaction timestamp.
+to | [Timestamp](types.md#timestamp) | No |Timestamp to filter transactions to (inclusive). Refers to transaction timestamp.
 pageToken | [Page token](types.md#page-token) | No | Specifies which result data page to retrieve if there are more than one page
 
 ### Header params
