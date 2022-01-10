@@ -39,7 +39,7 @@ string | All dates and times should be in UTC. The representation is an ISO 8601
 
 JSON type | Description | Examples
 ----------- | --------- | -------
-string | Bank transfer reference number. For transfers made in Finland corresponds to 20 digit Finland bank transfer reference. Format can vary according to country's banking infrastructure regulations. The reference is considered unique for a duration of 1 year. | "77060913004200000128"
+string | Bank transfer reference number. Transfer Reference is a reference that is assigned to each transfer and is visible in bank account statement when transfer is completed and received by your bank. You can find information about the transfer reference [here](https://developer.mobilepay.dk/node/2551). The reference is considered unique for a duration of 1 year. | "03000000000011602193"
 
 ## Transaction type
 
