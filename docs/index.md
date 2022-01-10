@@ -72,49 +72,8 @@ When submitting requests, `Content-Type: application/json` HTTP header must be p
 
 `$ curl --request GET --header 'Content-Type: application/json' --url https://<mobile-pay-root>/resource`
 
-### Payment Reference
-
-
-Payment Reference is a reference that is assigned to payment and is visible in bank account statement when payment is completed and received by your bank. It is usually used for tracking and verifying which payments were received to the bank account (e.g. transfers).
-
-How do decode the payment Reference? For example **PCRRRRRRRRJJJDDMMYYX** 
-
-## _MobilePay specific reference_
-
-**(1) PC**
-| PC | Product code  |
-|--|--|
-| 01  |  **POS**|
-| 02 | **MyShop** |
-| 03 | **Subscriptions** |
-| 04 | **Invoice**  |
-| 05 | **AppSwitch**  |
-| 06 | **Online**  |
-
-(2) _**RRRRRRRR**_
-
-- External Payment Point ID (length 8)
-
--   (Myshop number, Pos LocationID....) - External Payment PointID will be sent in the payload from the product. 
-- The external payment point ID must be unique within the Merchant for the payment point. 
-- For Subscription and Invoice this will consist of 8 zeros (00000000).
- 
-
-(3) _**JJJ**_
-
-- Running number
--  (length 3)
-
-(4) **DDMMYY**
-
- - **DDMMYY** = Date (DDMMYY 
- -  length 6
-
-(5) _**X**_
-
-- **X** = Check digit (length 1)_
-
-_**Example**: **03000000000011602193**  - which indicates Subscriptions payments received 16.02.2019._
+### Transfer Reference
+Transfer Reference is a reference that is assigned to each transfer and is visible in bank account statement when transfer is completed and received by your bank. You can find information about the transfer reference [here](https://developer.mobilepay.dk/node/2551).
 
 # <a name="payment_point_id"/> PaymentPointId 
 
