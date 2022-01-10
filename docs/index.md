@@ -72,9 +72,6 @@ When submitting requests, `Content-Type: application/json` HTTP header must be p
 
 `$ curl --request GET --header 'Content-Type: application/json' --url https://<mobile-pay-root>/resource`
 
-### Transfer Reference
-Transfer Reference is a reference that is assigned to each transfer and is visible in bank account statement when transfer is completed and received by your bank. You can find information about the transfer reference [here](https://developer.mobilepay.dk/node/2551).
-
 # <a name="payment_point_id"/> PaymentPointId 
 
 When using the Transaction Reporting API, you will be introduced to the term 'paymentPointId'. paymentPointId - GUID assigned to payment pointAs MobilePay has different API product, and each product has a payment point. The payment point is named differently across products.  
