@@ -11,7 +11,7 @@ MobilePay TransactionReporting API allows to query all activities taking place a
 
 This document explains how to make a technical integration to the MobilePay Transaction Reporting product. The intended audience is technical integrators from merchant itself, or from Partner Banks.
 
-Please note: Our reconciliation API is not available in the sandbox environment.
+Please note: Our Transaction Reporting API is not available in the sandbox environment.
 
 
 
