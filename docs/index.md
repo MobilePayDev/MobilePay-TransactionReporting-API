@@ -14,6 +14,11 @@ Please note: Our Transaction Reporting API is not available in the sandbox envir
 
 Some processes in banking are by nature asynchronous. You can guess and be correct often, but it will cost on support hours for you and your customer.  By integrating and using the API, you take the guesswork out. From an architecture perspective, creating your own mirror database expecting a result is not advisable compared to querying a “single source of truth”. Sales and clearing are two different internal processes. As a merchant, you can sell, but the clearing is not always 100% matched to the sales. This is where the TRX API is highly useful.   
 
+
+![reconciliation](docs/assets/reconciliationflow.png)
+
+
+
 # How does it work? 
 
 A settlement pay out includes all your sales transactions from the previous day, net of refunds and fees. By using the API, you get a full list of all sales transactions and corresponding fees, totalling to the settlement on your bank account. You can reconcile your accounts with a high degree of data and transparency, moving your business towards always having up-to-date financial overviews. 
@@ -36,13 +41,8 @@ In order to call our APIs from your systems you might need to whitelist our endp
 ### OpenID Connect
 When the merchant is onboarded, he has a user in MobilePay that is able to manage which products the merchant wishes to use. The OpenID Connect protocol is a simple identity layer on top of the OAuth 2.0 protocol.
 
-Client: In order for this to work, the merchant must grant consent to an application(Client). The client is the application that is attempting to get access to the user’s account. This consent is granted through mechanism in the [OpenID Connect](http://openid.net/connect/) protocol suite.
+Client: In order for this to work, the merchant must grant consent to an application(Client). Client must initiate the [hybrid flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth) specified in OpenID connect. For Transaction Reporting product the Client must request consent from the merchant using the `transactionreporting` scope. You also need to specify `offline_access` scope, in order to get the refresh token. The authorization server is [located here](https://api.mobilepay.dk/merchant-authentication-openidconnect). If the merchant grants consent, an authorization code is returned which the Client must exchange for an id token, an access token and a refresh token. The refresh token is used to refresh ended sessions without asking for merchant consent again. This means that if the Client receives an answer from the api gateway saying that the access token is invalid, the refresh token is exchanged for a new access token and refresh token. 
 
-Client must initiate the [hybrid flow](http://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth) specified in OpenID connect. For Transaction Reporting product the Client must request consent from the merchant using the `transactionreporting` scope. You also need to specify `offline_access` scope, in order to get the refresh token. The authorization server is [located here](https://api.mobilepay.dk/merchant-authentication-openidconnect).
-
-If the merchant grants consent, an authorization code is returned which the Client must exchange for an id token, an access token and a refresh token. The refresh token is used to refresh ended sessions without asking for merchant consent again. This means that if the Client receives an answer from the api gateway saying that the access token is invalid, the refresh token is exchanged for a new access token and refresh token. 
-
-An example of how to use OpenID connect in C# [can be found here](https://github.com/MobilePayDev/MobilePay-Invoice/tree/master/ClientExamples).
 
 ### Supported Endpoints
 Find the supported endpoints in the links below
