@@ -9,13 +9,19 @@ layout: default
 
 MobilePay TransactionReporting API allows to query all activities taking place at any of your MobilePay payment locations.
 
-This document explains how to make a technical integration to the MobilePay Transaction Reporting product. The intended audience is technical integrators from merchant itself, or from Partner Banks.
 
 Please note: Our Transaction Reporting API is not available in the sandbox environment.
 
+Some processes in banking are by nature asynchronous. You can guess and be correct often, but it will cost on support hours for you and your customer.  By integrating and using the API, you take the guesswork out. From an architecture perspective, creating your own mirror database expecting a result is not advisable compared to querying a “single source of truth”. Sales and clearing are two different internal processes. As a merchant, you can sell, but the clearing is not always 100% matched to the sales. This is where the TRX API is highly useful.   
 
+# How does it work? 
 
-### Merchant onboarding
+A settlement pay out includes all your sales transactions from the previous day, net of refunds and fees. By using the API, you get a full list of all sales transactions and corresponding fees, totalling to the settlement on your bank account. You can reconcile your accounts with a high degree of data and transparency, moving your business towards always having up-to-date financial overviews. 
+Note: if you chose to have fees invoiced, then the fees will not be deducted directly by MobilePay, and you instead need to reconcile against the invoices you receive. Invoiced fees are not visible in the API.
+
+# Merchant onboarding
+This document explains how to make a technical integration to the MobilePay Transaction Reporting product. The intended audience is technical integrators from merchant itself, or from Partner Banks.
+
 As an integrator, you automatically have access to the Transaction Reporting API. As a merchant, you get access to the MobilePay Production environment, where you can test the technical integration. The Reconciliation API consists of GET calls, which is why it not available in the sandbox environment.
 
 The environment is located on [The Developer Portal](https://developer.mobilepay.dk/) 
