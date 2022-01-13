@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# <a name="overview"/> Overview
+# <a name="overview"/> Overview over Transaction Reporting API
 
 *Purpose:* The main objective is to make it easier for you to do reconciliation on your side. We at MobilePay will provide details of transactions to help you with that, with the products that MobilePay offers. This will be done by summarizing payment, fees and refunds etc. These are summarized in further details below. 
 
@@ -16,7 +16,7 @@ Please note: Our reconciliation API is not available in the sandbox environment.
 
 
 ### Merchant onboarding
-As an integrator, you automatically have access to the API. As a merchant, you get access to the MobilePay Production environment, where you can test the technical integration. The Reconciliation API consists of GET calls, which is why it not available in the sandbox environment.
+As an integrator, you automatically have access to the Transaction Reporting API. As a merchant, you get access to the MobilePay Production environment, where you can test the technical integration. The Reconciliation API consists of GET calls, which is why it not available in the sandbox environment.
 
 The environment is located on [The Developer Portal](https://developer.mobilepay.dk/) 
 
