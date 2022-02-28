@@ -12,10 +12,7 @@ MobilePay TransactionReporting API allows to query all activities taking place a
 
 Some processes in banking are by nature asynchronous. You can guess and be correct often, but it will cost on support hours for you and your customer.  By integrating and using the API, you take the guesswork out. From an architecture perspective, creating your own mirror database expecting a result is not advisable compared to querying a “single source of truth”. Sales and clearing are two different internal processes. As a merchant, you can sell, but the clearing is not always 100% matched to the sales. This is where the TRX API is highly useful.   
 
-
-![reconciliation](docs/assets/reconciliationflow.png)
-
-
+ 
 
 # How does it work? 
 
