@@ -4,6 +4,11 @@ layout: default
 
 # <a name="overview"/> Overview over Transaction Reporting API
 
+**Important**
+As the reporting evolves, APIs are periodically reorganized, upgraded and improved. When APIs evolve, the old API is deprecated and eventually removed. This means that Transaction Reporting API v1 and v2 is now deprecated and we no longer onboard any merchants to these versions. We have instead introduced Reporting v3. Please find the updated documentation [here](https://developer.mobilepay.dk/docs/reporting). We have also made a [migration guide](https://developer.mobilepay.dk/docs/reporting/migrate-from-v1v2) to ease the migration from v1 and v2 to v3. If you have any questions do not hesitate to contact us at developer@mobilepay.dk 
+
+-------------------------------------------
+
 *Purpose:* The main objective is to make it easier for you to do reconciliation on your side. We at MobilePay will provide details of transactions to help you with that, with the products that MobilePay offers. This will be done by summarizing payment, fees and refunds etc. These are summarized in further details below. 
 
 
